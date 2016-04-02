@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 //Social Login
@@ -23,3 +23,12 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/user/{id}','UserController@user');
+Route::get('/user/profile/{id}','UserController@profile');
+
+Route::post('/user/updateProfile','UserController@updateProfile');
+Route::post('/user/updatePassword','UserController@updatePassword');
+Route::post('/user/updateInfo','UserController@updateInfo');
+
+//Route::match(['get', 'post'], 'admin/createAdmin', 'AdminController@createAdmin');
+Route::get('admin', 'AdminController@admin');

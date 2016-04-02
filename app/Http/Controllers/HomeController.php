@@ -26,4 +26,11 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    /*public function user($id)
+    {
+        $user = DB::table('users')->where('id', $id)->first();
+        return view('user', compact('user'));
+    }*/
+    
 }

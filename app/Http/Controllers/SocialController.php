@@ -30,10 +30,11 @@ class SocialController extends Controller
         return Socialite::driver($provider)->redirect();
     }
 
+
     public function getSocialAuthCallback($provider=null)
     {
         if($user = Socialite::driver($provider)->user()) {
-            if ($the_user = User::select()->where('email', '=', '$user->email')->first()) {
+            if ($the_user = User::where('email', $user->email)->first()) {
                 Auth::login($the_user);
             } else {
                 $new_user = new User;

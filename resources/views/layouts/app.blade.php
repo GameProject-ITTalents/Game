@@ -39,24 +39,40 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}">admin</a></li>
+                <ul class="nav navbar-nav navbar-left">
+
+                    @if (Auth::user() && Auth::user()->user == 1)
+                        <li><a href="{{ url('/admin') }}">admin</a></li>
+                    @endif
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <form action="{{--search.php--}}" method="post" class="navbar-form" role="search">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search" name="search" id="srch-term">
+                                <div class="input-group-btn">
+                                    <button name="submit" class="btn btn-primary" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
                     <li><a href="{{ url('/') }}">language</a></li>
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
+                        <li>
+                            <img src="{{url(Auth::user()->avatar)}}" style="max-width: 30px; position: relative; top: 10px">
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
-
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href=" {{ url('/user/' . Auth::user()->id) }}"><i class="fa fa-user fa-fw"></i>Profile</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
