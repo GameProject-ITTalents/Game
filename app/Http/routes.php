@@ -31,4 +31,9 @@ Route::post('/user/updatePassword','UserController@updatePassword');
 Route::post('/user/updateInfo','UserController@updateInfo');
 
 //Route::match(['get', 'post'], 'admin/createAdmin', 'AdminController@createAdmin');
-Route::get('admin', 'AdminController@admin');
+Route::get('admin/panel', 'AdminController@admin');
+
+//Route::get('/viewAllUsers', 'AdminController@viewAllUsers');
+Route::get('/viewAllUsers/{sortingMethod}', 'AdminController@viewAllUsers');
+Route::get('admin/addUser', 'AdminController@addUser');
+

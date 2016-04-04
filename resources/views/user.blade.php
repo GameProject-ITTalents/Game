@@ -17,7 +17,7 @@
                 <div class="col-md-8">
                     <div class="form-group col-md-8">
                         <h2>Profile Info</h2>
-                        @if ($user->social == 0 && Auth::user()->id == $user->id)
+                        @if (Auth::user()->id == $user->id)
                         <label>Name</label>
                         <input type="text" class="form-control" placeholder="{{$user->name}}">
                         <br>

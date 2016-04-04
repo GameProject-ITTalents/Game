@@ -17,6 +17,8 @@
     <link rel="stylesheet" type="text/css" href="css/app.css">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
+
+
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-static-top">
@@ -42,7 +44,7 @@
                 <ul class="nav navbar-nav navbar-left">
 
                     @if (Auth::user() && Auth::user()->user == 1)
-                        <li><a href="{{ url('/admin') }}">admin</a></li>
+                        <li><a href="{{ url('/admin/panel') }}">admin</a></li>
                     @endif
                 </ul>
 

@@ -27,7 +27,7 @@
                 <div class="col-md-8">
                     <div class="form-group col-md-8">
                         <h2>Profile Info</h2>
-                        @if ($user->social == 0 && Auth::user()->id == $user->id)
+                        @if (Auth::user()->id == $user->id || Auth::user()->user == 1)
                             <form class="panel" id="form3" method="post" action="{{url('user/updateInfo')}}">
                                 {{csrf_field()}}
                                 <label>Name</label>
@@ -39,6 +39,7 @@
                                 <button type="submit" form="form3" class="btn btn-success">Change Info</button>
                                 <br>
                             </form>
+                        @elseif ($user->social == 0 && Auth::user()->id == $user->id)
                             <form class="panel" id="form2" method="post" action="{{url('user/updatePassword')}}">
                                 {{csrf_field()}}
                                 <label for="currentPassword">Old Password</label>
@@ -50,7 +51,6 @@
                                 <div class="text-danger">{{$errors->first('password')}}</div>
                                 <label for="currentPassword">Confirm Password</label>
                                 <input type="password" name="password_confirmation" class="form-control">
-                                {{--<div class="text-danger">{{$errors->first('password2')}}</div>--}}
                                 <br>
                                 <button type="submit" form="form2" class="btn btn-success">Change Password</button>
                             </form>

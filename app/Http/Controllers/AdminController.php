@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\User;
 use Validator;
 use Auth;
+use DB;
 
 class AdminController extends Controller
 {
@@ -83,4 +84,36 @@ class AdminController extends Controller
         }
         return View('admin.createAdmin');
     }
+
+    public function viewAllUsers($sortingMethod)
+    {
+        switch ($sortingMethod) {
+            case 1:
+                $users = DB::table('users')->select()->orderBy('created_at', 'asc')->paginate(2);
+                break;
+            case 2:
+                $users = DB::table('users')->select()->orderBy('created_at', 'desc')->paginate(2);
+                break;
+            case 0:
+                $users = DB::table('users')->select()->orderBy('name', 'asc')->paginate(2);
+                break;
+        }
+
+        //$users = DB::table('users')->get();
+        if ($this->isAdmin()) {
+            return view('admin.viewAllUsers', compact('users'));
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function addUser()
+    {
+        if ($this->isAdmin()) {
+            return view('admin.addUser');
+        } else {
+            return redirect()->back();
+        }
+    }
 }
+
