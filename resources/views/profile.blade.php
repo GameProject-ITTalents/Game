@@ -3,6 +3,12 @@
 @section('content')
     <br>
     <div class="container">
+        @if (Session::has('status'))
+            <div class="bg-success" style="padding: 20px">
+                {{ Session::get('status') }}
+            </div>
+            <hr>
+        @endif
         <section style="padding-bottom: 50px; padding-top: 50px;">
             <div class="row">
                 <div class="col-md-4">

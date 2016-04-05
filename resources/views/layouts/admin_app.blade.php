@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Almonds Admin Panel</title>
+    <title>Game Admin Panel</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -74,27 +74,42 @@
                         </li>
                     </ul>
                 </li>
+                <li class="divider"></li>
                 <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#posts"><i class="fa fa-sticky-note-o"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
-                    <ul id="posts" class="collapse">
+                    <a href="javascript:;" data-toggle="collapse" data-target="#forum"><i class="fa fa-comment"></i> Forum <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="forum" class="collapse">
                         <li>
                             <a href="#">View all posts</a>
                         </li>
                         <li>
                             <a href="#">Add Post</a>
                         </li>
+                        <li>
+                            <a href="#">Forum catogories</a>
+                        </li>
                     </ul>
-                </li>
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-list-ul"></i> Post Categories </a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-fw fa-comments-o"></i> Post Comments</a>
                 </li>
-
+                <li class="divider"></li>
                 {{--PROFILE--}}
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-user"></i> Profile </a>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#e-shop"><i class="fa fa-shopping-cart"></i> E-Shop <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="e-shop" class="collapse">
+                        <li>
+                            <a href="{{ url('/shop') }}">View all Products</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/newObject') }}">Add Object</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/buyCoins') }}">View Coins Shop</a>
+                        </li>
+                        <li>
+                            <a href="#">Transactions</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

@@ -48,21 +48,25 @@
                     <div class="form-group col-md-8">
                         <h3>Gamer Info</h3>
                         <br />
-                        <label>Games Played</label>
-                        <p class="form-control"></p>
-                        <label>Highest Score</label>
-                        <p class="form-control"></p>
-                        <label>Wallet</label>
-                        <p class="form-control"></p>
+                        <label>Games Played:</label>   {{ $user->games_played }}
                         <br>
+                        <label>Highest Score:</label>   {{ $user->highest_score }}
+                        <hr>
+                        <label>Wallet:</label>   {{ $user->coins }}
+                        <br><br>
+                        <label>Mario:</label>   {{ $user->mario }}</p>
+                        <label>Mushroom:</label>   {{ $user->mushroom }}</p>
+                        <label>Shooting:</label>   {{ $user->shooting }}</p>
+                        <label>Double Jump:</label>   {{ $user->double_jump }}</p>
+                        <label>Low Gravity:</label>   {{ $user->low_gravity }}</p>
                     </div>
-                    <div class="form-group col-md-8">
+                    {{--<div class="form-group col-md-8">
                         <h3>Forum Activity</h3>
                         <br />
                         <label>Post Title</label>
                         <p class="form-control"></p>
                         <br>
-                    </div>
+                    </div>--}}
                 </div>
             </div>
             <!-- ROW END -->

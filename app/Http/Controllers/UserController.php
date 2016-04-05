@@ -9,6 +9,7 @@ use Auth;
 use DB;
 use Validator;
 use Hash;
+use App\Comments;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -79,8 +80,8 @@ class UserController extends Controller
             $user = new User;
             $user->where('email', '=', Auth::user()->email)
                 ->update(['name' => $request->name]);
-            $user->where('email', '=', Auth::user()->email)
-                ->update(['email' => $request->email]);
+            /*$user->where('email', '=', Auth::user()->email)
+                ->update(['email' => $request->email]);*/
 
             return redirect('user/' . Auth::user()->id)->with('status', 'Your info has been changed');
         }
@@ -111,6 +112,70 @@ class UserController extends Controller
             }
 
             return redirect('user/'. Auth::user()->id)->with('status', 'Your password has been changed changed');
+        }
+    }
+
+    public function createComment(Request $request)
+    {
+        $comment = e($request->comment);
+        $date = date('Y-m-d');
+        $time = date('H:i:s');
+        Comments::insert([
+           'comment' => $comment,
+            'id_user' => Auth::user()->id,
+            'date' => $date,
+            'time' => $time,
+        ]);
+        return redirect('forum')->with('status', 'Post published');
+    }
+
+    public function show($total, $items)
+    {
+        $user = DB::table('users')->where('id', Auth::user()->id)->first();
+        $array = json_decode($items);
+        /*$mario = 0;
+        $mushroom = 0;
+        $shooting = 0;
+        $double_jump = 0;
+        $low_gravity = 0;*/
+        if ($total <= $user->coins) {
+            $coins = $user->coins - $total;
+            $mario = $user->mario;
+            $mushroom = $user->mushroom;
+            $shooting = $user->shooting;
+            $double_jump = $user->double_jump;
+            $low_gravity = $user->low_gravity;
+            foreach ($array as $item) {
+                switch ($item) {
+                    case 1:
+                        $mario++;
+                        break;
+                    case 2:
+                        $mushroom++;
+                        break;
+                    case 3:
+                        $shooting++;
+                        break;
+                    case 4:
+                        $double_jump++;
+                        break;
+                    case 5:
+                        $low_gravity++;
+                }
+            }
+            User::where('id', $user->id)
+                ->update([
+                    'coins' => $coins,
+                    'mario' => $mario,
+                    'mushroom' => $mushroom,
+                    'shooting' => $shooting,
+                    'double_jump' => $double_jump,
+                    'low_gravity' => $low_gravity
+                ]);
+            return redirect('/cart');
+        }
+        else {
+            return redirect('/buyCoins');
         }
     }
 }

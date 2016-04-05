@@ -14,13 +14,13 @@
                             <a href="#" class="btn btn-default btn-lg"><i class="fa fa-gamepad fa-fw"></i> <span class="network-name">Play</span></a>
                         </li>
                         <li>
-                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-comment fa-fw"></i> <span class="network-name">Forum</span></a>
+                            <a href="{{ url('/forum') }}" class="btn btn-default btn-lg"><i class="fa fa-comment fa-fw"></i> <span class="network-name">Forum</span></a>
                         </li>
                         <li>
                             <a href="#" class="btn btn-default btn-lg"><i class="fa fa-arrow-up fa-fw"></i> <span class="network-name">High Scores</span></a>
                         </li>
                         <li>
-                            <a href="#" class="btn btn-default btn-lg"><i class="fa fa-shopping-cart fa-fw"></i> <span class="network-name">E-SHOP</span></a>
+                            <a href="{{ url('/shop') }}" class="btn btn-default btn-lg"><i class="fa fa-shopping-cart fa-fw"></i> <span class="network-name">E-SHOP</span></a>
                         </li>
                         <li>
                             <a href="#" class="btn btn-default btn-lg"><i class="fa fa-info fa-fw"></i> <span class="network-name">About</span></a>

@@ -29,6 +29,7 @@ Route::get('/user/profile/{id}','UserController@profile');
 Route::post('/user/updateProfile','UserController@updateProfile');
 Route::post('/user/updatePassword','UserController@updatePassword');
 Route::post('/user/updateInfo','UserController@updateInfo');
+Route::post('/user/createComment','UserController@createComment');
 
 //Route::match(['get', 'post'], 'admin/createAdmin', 'AdminController@createAdmin');
 Route::get('admin/panel', 'AdminController@admin');
@@ -36,4 +37,36 @@ Route::get('admin/panel', 'AdminController@admin');
 //Route::get('/viewAllUsers', 'AdminController@viewAllUsers');
 Route::get('/viewAllUsers/{sortingMethod}', 'AdminController@viewAllUsers');
 Route::get('admin/addUser', 'AdminController@addUser');
+
+//ESHOP
+Route::get('/shop', 'ShopController@show');
+Route::get('/buyCoins', 'ShopController@buyCoins');
+Route::get('/editProduct/{id}', 'ShopController@editObject');
+Route::post('/updateProduct/{id}', 'ShopController@updateObject');
+Route::get('/deleteProduct/{id}', 'ShopController@destroyObject');
+
+Route::get('/newObject', 'ShopController@newObject');
+Route::post('/saveObject', 'ShopController@addObject');
+
+Route::get('/newBundle', 'ShopController@newBundle');
+Route::post('/saveBundle', 'ShopController@addBundle');
+Route::get('/editBundle/{id}', 'ShopController@editBundle');
+Route::post('/updateBundle/{id}', 'ShopController@updateBundle');
+Route::get('/deleteBundle/{id}', 'ShopController@destroyBundle');
+
+//CART
+Route::get('/addProduct/{productId}', 'CartController@addItem');
+Route::get('/removeItem/{productId}', 'CartController@removeItem');
+Route::get('/cart', 'CartController@showCart');
+
+//TEST
+//Route::get('/buyWithCoins/{total}/{$itemsString}', 'UserController@buyWithCoins');
+
+Route::resource('total.items', 'UserController');
+
+
+//FORUM
+Route::get('/forum', 'CommentsController@show');
+
+
 
