@@ -68,5 +68,16 @@ Route::resource('total.items', 'UserController');
 //FORUM
 Route::get('/forum', 'CommentsController@show');
 
+//ABOUT
+Route::get('/about', 'HomeController@about');
+
+//Route::get('/game', 'HomeController@game');
+Route::get('/game', 'HomeController@game');
+
+
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
 
 
