@@ -11,17 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
 
 //Social Login
 Route::get('social/{provider?}', 'SocialController@getSocialAuth');
 Route::get('social/callback/{provider?}', 'SocialController@getSocialAuthCallback');
 
 Route::auth();
-
-Route::get('/home', 'HomeController@index');
 
 Route::get('/user/{id}','UserController@user');
 Route::get('/user/profile/{id}','UserController@profile');
@@ -31,10 +28,8 @@ Route::post('/user/updatePassword','UserController@updatePassword');
 Route::post('/user/updateInfo','UserController@updateInfo');
 Route::post('/user/createComment','UserController@createComment');
 
-//Route::match(['get', 'post'], 'admin/createAdmin', 'AdminController@createAdmin');
 Route::get('admin/panel', 'AdminController@admin');
 
-//Route::get('/viewAllUsers', 'AdminController@viewAllUsers');
 Route::get('/viewAllUsers/{sortingMethod}', 'AdminController@viewAllUsers');
 Route::get('admin/addUser', 'AdminController@addUser');
 
@@ -59,11 +54,7 @@ Route::get('/addProduct/{productId}', 'CartController@addItem');
 Route::get('/removeItem/{productId}', 'CartController@removeItem');
 Route::get('/cart', 'CartController@showCart');
 
-//TEST
-//Route::get('/buyWithCoins/{total}/{$itemsString}', 'UserController@buyWithCoins');
-
 Route::resource('total.items', 'UserController');
-
 
 //FORUM
 Route::get('/forum', 'CommentsController@show');
@@ -71,13 +62,12 @@ Route::get('/forum', 'CommentsController@show');
 //ABOUT
 Route::get('/about', 'HomeController@about');
 
-//Route::get('/game', 'HomeController@game');
 Route::get('/game', 'HomeController@game');
 
 
-Route::get('/welcome', function () {
+/*Route::get('/welcome', function () {
     return view('welcome');
-});
+});*/
 
 
 

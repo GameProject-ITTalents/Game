@@ -34,7 +34,8 @@ class HomeController extends Controller
 
     public function game()
     {
-        redirect('/game');
+        return json_encode(Auth::user());
+        //redirect('/game');
         //return view('game');
     }
 

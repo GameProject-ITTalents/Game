@@ -1,6 +1,4 @@
 body {
-  font-family: 'Lato'; }
-  body .fa-btn {
-    margin-right: 6px; }
-
+  background: url(../img/SuperMario.jpg) no-repeat center center fixed;
+}
 /*# sourceMappingURL=app.css.map */

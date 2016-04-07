@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Game</title>
+    <title>Super Mario</title>
 
     <!-- Fonts -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
@@ -13,8 +13,10 @@
     <link href="https://fonts.googleapis.com/css?family=Poiret+One&amp;subset=latin,cyrillic" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/app.css">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    {{--<link rel="stylesheet" href="css/landing-page.css" type="text/css">--}}
+    <link rel="stylesheet" href="css/app.css" type="text/css">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
 
@@ -35,7 +37,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Game
+                    Super Mario
                 </a>
             </div>
 
