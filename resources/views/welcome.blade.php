@@ -1,7 +1,9 @@
-{{--@extends('layouts.app')--}}
+@extends('layouts.app')
 
 @section('content')
-<?php echo json_encode(App\User::where('id', Auth::user()->id)->get()); ?>
+<h1>Updated User</h1>
+    @foreach($returnedUser as $key => $value)
+     <p>{{ $key . ' => ' . $value }}</p>
+    @endforeach
 @endsection
-{{--
-{{ url('welcome') }}--}}
+{{--{{ url('welcome') }}--}}

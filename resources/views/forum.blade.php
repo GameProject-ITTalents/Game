@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container" style="background-color: rgba(36,75,84,0.15)">
 
         <h1>Forum</h1>
         <hr>

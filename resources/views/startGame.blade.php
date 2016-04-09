@@ -8,10 +8,10 @@
         background: #222 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAFVBMVEUqKiopKSkoKCgjIyMuLi4kJCQtLS0dJckpAAAAO0lEQVR42iXLAQoAUQhCQSvr/kfe910jHIikElsl5qVFa1iE5f0Pom/CNZdbNM6756lQ41NInMfuFPgAHVEAlGk4lvIAAAAASUVORK5CYII=");
         color: black;
     }
-    #game {
+    /*#game {
         width: 100%;
         height: 100%;
-    }
+    }*/
     #game canvas {
         image-rendering:optimizeSpeed;             /* Legal fallback */
         image-rendering:-moz-crisp-edges;          /* Firefox        */
@@ -23,8 +23,12 @@
         -ms-interpolation-mode:nearest-neighbor;   /* IE8+           */
     }
 </style>
-<div id="game"></div>
+{{ csrf_field() }}
+<div class="container-fluid">
+<div class="col-md-12 pull-right" id="game"></div>
+</div>
 <script src="js/phaser.min.js"></script>
+<script src="js/jquery.js"></script>
 <script src="js/index.js"></script>
 <script src="js/game.js"></script>
 <script src="js/states/state.js"></script>

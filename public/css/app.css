@@ -1,4 +1,8 @@
 body {
-  background: url(../img/SuperMario.jpg) no-repeat center center fixed;
+  background: url(../img/SuperMario.jpg) no-repeat center right fixed;
 }
 /*# sourceMappingURL=app.css.map */
+
+h1, h3 {
+  font-family: 'Carter One';
+}

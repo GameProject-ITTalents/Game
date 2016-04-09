@@ -1,3 +1,10 @@
 window.onload = function() {
-    var game = new Game().start();
+
+    $.ajax({
+        url:  "/userInfo",
+        success: function( data ) {
+            console.log(data);
+            var game = new Game().start();
+        }
+    });
 };

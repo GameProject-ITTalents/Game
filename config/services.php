@@ -17,13 +17,13 @@ return [
     'facebook' => [
         'client_id' => '1687397541510679',
         'client_secret' => '828d92d136471b2d55d13972aa454ec5',
-        'redirect' => 'http://localhost/Game/public/social/callback/facebook',
+        'redirect' => 'http://localhost/social/callback/facebook',
     ],
 
     'google' => [
-        'client_id' => '832562261312-fja0rcspmlulpeiartrlblastqb091dv.apps.googleusercontent.com',
-        'client_secret' => 'rRkEVk14mZ9EdTM9bt4hlvPm',
-        'redirect' => 'http://localhost/Game/public/social/callback/google',
+        'client_id' => '832562261312-0b4dv81hjj9e616iip9b7lrbmpffsumi.apps.googleusercontent.com',
+        'client_secret' => 'pgtwJVxLqIc4OqHrswGcmIVI',
+        'redirect' => 'http://localhost/social/callback/google',
     ],
 
 

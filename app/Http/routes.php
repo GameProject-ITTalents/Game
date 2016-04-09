@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', function() {
+    return view ('home');
+});
 Route::get('/home', 'HomeController@index');
 
 //Social Login
@@ -62,12 +64,16 @@ Route::get('/forum', 'CommentsController@show');
 //ABOUT
 Route::get('/about', 'HomeController@about');
 
-Route::get('/game', 'HomeController@game');
+Route::get('/startGame', 'HomeController@startGame');
+Route::get('/userInfo', 'HomeController@userInfo');
+//Route::post('/userRequest', 'HomeController@userRequest');
 
 
-/*Route::get('/welcome', function () {
-    return view('welcome');
-});*/
+//DEV
+Route::resource('/dev', 'DevController');
+Route::post('/userRequest', 'DevController@userRequest');
 
-
+Route::get('/test', function() {
+   return view('test');
+});
 

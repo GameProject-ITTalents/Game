@@ -79,19 +79,16 @@
                     <a href="javascript:;" data-toggle="collapse" data-target="#forum"><i class="fa fa-comment"></i> Forum <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="forum" class="collapse">
                         <li>
-                            <a href="#">View all posts</a>
+                            <a href="{{ url('/forum') }}">View all posts</a>
                         </li>
-                        <li>
-                            <a href="#">Add Post</a>
-                        </li>
-                        <li>
+                        {{--<li>
                             <a href="#">Forum catogories</a>
-                        </li>
+                        </li>--}}
                     </ul>
                 </li>
-                <li>
+                {{--<li>
                     <a href="#"><i class="fa fa-fw fa-comments-o"></i> Post Comments</a>
-                </li>
+                </li>--}}
                 <li class="divider"></li>
                 {{--PROFILE--}}
                 <li>
@@ -106,9 +103,9 @@
                         <li>
                             <a href="{{ url('/buyCoins') }}">View Coins Shop</a>
                         </li>
-                        <li>
+                        {{--<li>
                             <a href="#">Transactions</a>
-                        </li>
+                        </li>--}}
                     </ul>
                 </li>
             </ul>

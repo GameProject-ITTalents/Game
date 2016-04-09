@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\User;
+use Auth;
+use DB;
 
 class HomeController extends Controller
 {
@@ -32,17 +35,53 @@ class HomeController extends Controller
         return view('about');
     }
 
-    public function game()
+    public function startGame()
     {
-        return json_encode(Auth::user());
+        //return json_encode(Auth::user());
+        
         //redirect('/game');
-        //return view('game');
+        return view('startGame');
     }
 
-    /*public function user($id)
+    public function userInfo()
     {
-        $user = DB::table('users')->where('id', $id)->first();
-        return view('user', compact('user'));
-    }*/
+        return Auth::user();
+    }
+
+    public function userRequest(Request $request)
+    {
+        $returnedUser = $request->json()->all();
+        return view('welcome', compact('returnedUser'));
+
+        $user = DB::table('users')->where('id', Auth::user()->id)->first();
+
+        $id = $user->id;
+        $coins = $user->coins;
+        $mario = $user->mario;
+        $mushroom = $user->mushroom;
+        $shooting = $user->shooting;
+        $double_jump = $user->double_jump;
+        $low_gravity = $user->low_gravity;
+        $games_played = $user->games_played;
+        $highest_score = $user->highest_score;
+        $score = $user->score;
+        $level_reached = $user->level_reached;
+
+        User::where('id', $user->id)
+            ->update([
+                'coins' => $coins,
+                'mario' => $mario,
+                'mushroom' => $mushroom,
+                'shooting' => $shooting,
+                'double_jump' => $double_jump,
+                'low_gravity' => $low_gravity,
+                'games_played' => $games_played,
+                'highest_score' => $highest_score,
+                'score' => $score,
+                'level_reached' => $level_reached,
+            ]);
+        return redirect('/home');
+    }
+
     
 }
