@@ -83,5 +83,13 @@ class HomeController extends Controller
         return redirect('/home');
     }
 
+    public function highScore()
+    {
+        $highestScores = DB::table('users')
+            ->orderBy('highest_score', 'desc')
+            ->take(10)
+            ->get();
+        return view('highScore', compact('highestScores'));
+    }
     
 }

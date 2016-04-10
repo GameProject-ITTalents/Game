@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Game Admin Panel</title>
 
@@ -20,6 +21,7 @@
 
     <!-- Custom Fonts -->
     <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/app.css" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -52,9 +54,6 @@
                 <ul class="dropdown-menu">
                     <li><a href=" {{ url('/user/' . Auth::user()->id) }}"><i class="fa fa-user fa-fw"></i>Profile</a></li>
 
-                    {{--Settings--}}
-                    <li><a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a></li>
-
                     <li class="divider"></li>
                     <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                 </ul>
@@ -71,6 +70,9 @@
                         </li>
                         <li>
                             <a href="{{ url('/admin/addUser') }}">Add User</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/dev') }}">Modify Player</a>
                         </li>
                     </ul>
                 </li>
@@ -97,9 +99,9 @@
                         <li>
                             <a href="{{ url('/shop') }}">View all Products</a>
                         </li>
-                        <li>
+                        {{--<li>
                             <a href="{{ url('/newObject') }}">Add Object</a>
-                        </li>
+                        </li>--}}
                         <li>
                             <a href="{{ url('/buyCoins') }}">View Coins Shop</a>
                         </li>

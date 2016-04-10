@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function() {
+/*Route::get('/', function() {
     return view ('home');
-});
+});*/
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
 //Social Login
@@ -24,11 +25,17 @@ Route::auth();
 
 Route::get('/user/{id}','UserController@user');
 Route::get('/user/profile/{id}','UserController@profile');
+Route::post('/createUser', 'UserController@createUser');
+Route::get('/user/delete/{id}', 'UserController@deleteUser');
+Route::get('/user/makeAdmin/{id}', 'UserController@makeAdmin');
+
+Route::get('/allUsers', 'DevController@allUsers');
+Route::post('/showUserData', 'DevController@showUserData');
 
 Route::post('/user/updateProfile','UserController@updateProfile');
 Route::post('/user/updatePassword','UserController@updatePassword');
 Route::post('/user/updateInfo','UserController@updateInfo');
-Route::post('/user/createComment','UserController@createComment');
+//Route::post('/user/createComment','UserController@createComment');
 
 Route::get('admin/panel', 'AdminController@admin');
 
@@ -59,15 +66,18 @@ Route::get('/cart', 'CartController@showCart');
 Route::resource('total.items', 'UserController');
 
 //FORUM
-Route::get('/forum', 'CommentsController@show');
+Route::resource('/forum', 'PostsController');
+
 
 //ABOUT
 Route::get('/about', 'HomeController@about');
 
+//GAME
 Route::get('/startGame', 'HomeController@startGame');
 Route::get('/userInfo', 'HomeController@userInfo');
 //Route::post('/userRequest', 'HomeController@userRequest');
 
+Route::get('/highScore', 'HomeController@highScore');
 
 //DEV
 Route::resource('/dev', 'DevController');

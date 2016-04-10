@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-    <div class="panel panel-default col-md-6">
+    <div class="panel panel-default col-md-6" style="background-color: rgba(36,75,84,0.15)">
         <h1>Super Mario IT Talents Style</h1>
         <label for="">Game name</label>
         <p>Super Mario IT Talents Style</p>

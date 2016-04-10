@@ -10,9 +10,10 @@
 
             <form class="list-group-item" method="post" action="{{url('/userRequest')}}">
                 {{csrf_field()}}
-
-                <input type="checkbox" checked>
-
+                <div class="form-group">
+                    <label for="">ID</label>
+                    <input name="id" class="form-control" type="text" value="{{$user->id}}">
+                </div>
                 <div class="form-group">
                     <label for="">Coins</label>
                     <input name="coins" class="form-control" type="text" value="{{$user->coins}}">

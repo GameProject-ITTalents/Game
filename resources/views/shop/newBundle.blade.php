@@ -37,19 +37,6 @@
 
                         </div>
                     </div>
-                    {{--<div class="form-group">
-                        <label class="col-md-3 control-label" for="image">Image URL</label>
-                        <div class="col-md-9">
-                            <input id="image" name="image" type="text" placeholder="Image URL" class="form-control input-md" >
-
-                        </div>
-                    </div>--}}
-                    {{--<div class="form-group">
-                        <label class="col-md-3 control-label" for="file">Image</label>
-                        <div class="col-md-9">
-                            <input id="image" name="image" class="input-file" type="file">
-                        </div>
-                    </div>--}}
                     <div class="form-group">
                         <label class="col-md-3 control-label" for="submit"></label>
                         <div class="col-md-9">

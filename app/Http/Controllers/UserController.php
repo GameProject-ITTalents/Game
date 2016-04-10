@@ -33,7 +33,6 @@ class UserController extends Controller
         return view('profile', compact('user'));
     }
 
-
     public function updateProfile(Request $request)
     {
         $rules = ['image' => 'image|required'];
@@ -177,5 +176,40 @@ class UserController extends Controller
         else {
             return redirect('/buyCoins');
         }
+    }
+    
+    public function createUser(Request $request)
+    {
+        if (Auth::user()->user == 1) {
+            $name = str_random(30) . '-' . $request->file('image')->getClientOriginalName();
+            $request->file('image')->move('profile', $name);
+            $user = new User;
+            $user->avatar = 'profile/' . $name;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->user = $request->admin;
+
+            $user->save();
+            
+        } 
+        return redirect('/viewAllUsers/0');
+    }
+
+    public function deleteUser($id)
+    {
+        if (Auth::user()->user == 1) {
+            User::destroy($id);
+        }
+        return redirect('/viewAllUsers/0')->with('status', 'User deleted successfully');
+    }
+
+    public function makeAdmin($id)
+    {
+        if (Auth::user()->user == 1) {
+            $user = DB::table('users')->where('id', $id)
+                ->update(['user' => 1]);
+        }
+        return redirect('/viewAllUsers/0')->with('status', 'User deleted successfully');
     }
 }

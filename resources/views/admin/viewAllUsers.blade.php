@@ -17,9 +17,7 @@
             </div>
         </div>
 
-
         @foreach ($users as $user)
-
             <div class="row list-group-item">
                 <div class="col-sm-4 col-md-3">
                     <a href="{{url('user/' . $user->id)}}">
@@ -39,16 +37,19 @@
                 <div class="col-sm-4 col-md-5">
                     <h3>Gamer Info</h3>
                     <label for="">Games Playes</label>
-                    <p>25</p>
+                    <p>{{$user->games_played}}</p>
                     <label for="">Highest Score</label>
-                    <p>100225</p>
+                    <p>{{$user->highest_score}}</p>
                     <label for="">Wallet</label>
-                    <p>2000</p>
+                    <p>{{$user->coins}}</p>
                 </div>
                 <div class="col-md-12">
                     <h4>Forum Activity</h4>
-                    <label for="">Posts</label> 24
-                    <a href="#"> See all posts</a>
+                    <?php
+                        $comments = DB::table('comments')->where('id_user', $user->id)->count();
+                    ?>
+                    <label for="">Posts  </label>  {{ $comments }}
+                    <a href="{{ url('/forum/' . $user->id) }}"> See all posts</a>
                     <br>
                     <a href="{{url('user/profile/' . $user->id)}}" class="btn btn-success">Edit User</a>
                     <a href="{{url('user/delete/' . $user->id)}}" class="btn btn-danger">Delete User</a>

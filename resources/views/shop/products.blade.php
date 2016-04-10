@@ -42,7 +42,7 @@
                         @if (Auth::user()->user == 1)
                             <td style="vertical-align: middle"td style="width: 150px">
                                 <a href="{{ url('/editProduct/' . $object->id) }}"><button class="btn btn-primary">Edit Price</button></a>
-                                <a href="{{ url('/deleteProduct/' . $object->id) }}"><button class="btn btn-danger">Delete</button></a>
+                                {{--<a href="{{ url('/deleteProduct/' . $object->id) }}"><button class="btn btn-danger">Delete</button></a>--}}
                             </td>
                         @else
                             <td style="vertical-align: middle"td style="width: 220px">
@@ -53,7 +53,7 @@
                     </tr>
                 @endforeach
                 </tbody>
-            @if (Auth::user()->user == 1)
+            {{--@if (Auth::user()->user == 1)
                 <tfoot>
                 <td></td>
                 <td></td>
@@ -62,7 +62,7 @@
                 <td></td>
                 <td><a href="{{ url('/newObject') }}"><button class="btn btn-success">Add Object</button></a></td>
                 </tfoot>
-            @endif
+            @endif--}}
             </table>
         </div>
     </div>

@@ -16,27 +16,21 @@ class DevController extends Controller
         $this->middleware('auth');
     }
 
+    public function allUsers(Request $request)
+    {
+        $users = DB::table('users')->pluck('name');
+        $data = json_encode($users);
+        return $data;
+    }
+
+    public function showUserData()
+    {
+
+    }
+
     public function userRequest(Request $request)
     {
-        /*$returnedUser = $request->json()->all();
-        return view('welcome', compact('returnedUser'));*/
-
-        //$user = DB::table('users')->where('id', Auth::user()->id)->first();
-
-        /*
-        $id = $user->id;
-        $coins = $user->coins;
-        $mario = $user->mario;
-        $mushroom = $user->mushroom;
-        $shooting = $user->shooting;
-        $double_jump = $user->double_jump;
-        $low_gravity = $user->low_gravity;
-        $games_played = $user->games_played;
-        $highest_score = $user->highest_score;
-        $score = $user->score;
-        $level_reached = $user->level_reached;*/
-
-        //$id = $request->id;
+        $id = $request->id;
         $coins = $request->coins;
         $mario = $request->mario;
         $mushroom = $request->mushroom;
@@ -50,7 +44,7 @@ class DevController extends Controller
 
         //dd($coins);
 
-        User::where('id', Auth::user()->id)
+        User::where('id', $id)
             ->update([
                 'coins' => $coins,
                 'mario' => $mario,
@@ -73,22 +67,14 @@ class DevController extends Controller
      */
     public function index()
     {
-        $user = DB::table('users')->where('id', Auth::user()->id)->first();
-        return view('dev', compact('user'));
+        if (Auth::user()->user == 1) {
+            $user = DB::table('users')->where('id', Auth::user()->id)->first();
+            return view('dev', compact('user'));
+        } else {
+            return redirect('/home');
+        }
     }
     
-    public function addLife()
-    {
-        $user = DB::table('users')->where('id', Auth::user()->id)->first();
-
-        $life = $user->mario;
-        $life++;
-
-        User::where('id', $user->id)
-            ->update(['mario' => $life]);
-        return redirect('/dev');
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -118,7 +104,12 @@ class DevController extends Controller
      */
     public function show($id)
     {
-        //
+        if (Auth::user()->user == 1) {
+            $user = DB::table('users')->where('id', $id)->first();
+            return view('dev', compact('user'));
+        } else {
+            return redirect('/home');
+        }
     }
 
     /**
@@ -129,7 +120,8 @@ class DevController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = DB::table('users')->where('id', $id)->first();
+        return view('dev', compact('user'));
     }
 
     /**

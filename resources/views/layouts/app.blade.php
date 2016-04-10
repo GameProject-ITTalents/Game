@@ -17,7 +17,6 @@
     <!-- Styles -->
    {{-- <link href="../css/bootstrap.min.css" rel="stylesheet">--}}
     <link href="/css/bootstrap.css" rel="stylesheet">
-    <link href="/css/bootstrap-switch.css" rel="stylesheet">
     {{--<link rel="stylesheet" href="css/landing-page.css" type="text/css">--}}
     <link rel="stylesheet" href="css/app.css" type="text/css">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
@@ -95,7 +94,6 @@
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap-switch.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}

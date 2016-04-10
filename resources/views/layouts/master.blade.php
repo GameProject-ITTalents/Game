@@ -34,7 +34,9 @@
                         <li><a href="/auth/register">Signup</a></li>
                     @else
                         {{--<li><a href="/order">My Order <span class="fa fa-briefcase"></span></a></li>--}}
+                        @if(Auth::user()->user == 0)
                         <li><a href="{{ url('/cart') }}">Cart <span class="fa fa-shopping-cart"></span></a></li>
+                        @endif
                         <li><a href="{{ url('/logout') }}">Logout {{ Auth::user()->name}}</a></li>
                         <li><a href="{{ url('/buyCoins') }}">{{ Auth::user()->coins }} coins  </a></li>
                     @endif
