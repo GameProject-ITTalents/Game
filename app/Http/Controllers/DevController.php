@@ -57,7 +57,8 @@ class DevController extends Controller
                 'score' => $score,
                 'level_reached' => $level_reached,
             ]);
-        return redirect('/dev');
+
+        //return redirect('/dev');
     }
 
     /**

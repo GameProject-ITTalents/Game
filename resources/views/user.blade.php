@@ -56,23 +56,13 @@
                         <label>Wallet:</label>   {{ $user->coins }}
                         <br><br>
 
+                       <h4>Mario : </h4>{{$user->mario}}
+                        </div>
+
+
                         <div>
                             <table class="table">
-                                <tr>
-                                    <td><h4>Mario : </h4></td>
-                                    <td>
-                                        <div class="btn-group" data-toggle="buttons">
-                                        <label class="btn btn-info
-                                        <?php if($user->mario == 1): ?>
-                                                active
-                                                <?php endif; ?>
-                                                ">
-                                            <input type="checkbox">
-                                            <span class="glyphicon glyphicon-ok"></span>
-                                        </label>
-                                        </div>
-                                    </td>
-                                </tr>
+
                                 <tr>
                                     <td><h4>Mushroom : </h4></td>
                                     <td>
