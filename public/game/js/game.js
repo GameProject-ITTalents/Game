@@ -2,8 +2,15 @@ var Game = (function() {
     function Game() {
         Phaser.Game.call(this, 400, 240, Phaser.AUTO, 'game', null, false, false);
 
-        this._totalScore = 0;
-        this._lifes = 3;
+        this.coins = 0;
+        this.marios = 0;
+        this.mushrooms = 0;
+        this.shootings = 0;
+        this.doubleJumps = 0;
+        this.lowGravities = 0;
+        this.gamesPlayed = 0;
+        this.score = 0;
+        this.levelReached = 0;
     }
 
     Game.prototype = Object.create(Phaser.Game.prototype);
@@ -12,7 +19,6 @@ var Game = (function() {
     Game.prototype.boot = function() {
         Phaser.Game.prototype.boot.call(this);
 
-        // set custom resize strategy
         this.scale.minWidth = this.width;
         this.scale.minHeight = this.height;
         this.scale.pageAlignHorizontally = true;

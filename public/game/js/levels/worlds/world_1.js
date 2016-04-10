@@ -1,9 +1,8 @@
 var WorldOne = (function() {
-	var NORMAL_GRAVITY = 960,
-		SKY_BLUE = '#6D93FC';
+	var SKY_BLUE = '#6D93FC';
 
 	function WorldOne(game) {
-		Level.call(this, game, NORMAL_GRAVITY);
+		Level.call(this, game);
 		this.mapKey = 'world_1';
 	}
 

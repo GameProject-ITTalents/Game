@@ -1,11 +1,11 @@
 var InputHandler = (function() {
     function InputHandler() {
-        this._inputMap =  {};
-        this._listenerMap = {};
+        this.inputMap =  {};
+        this.listenerMap = {};
     }
 
     InputHandler.prototype.setInputMap = function(inputMap) {
-        this._inputMap = inputMap || {};
+        this.inputMap = inputMap || {};
     };
 
     InputHandler.prototype.addListener = function(key, ctx, handler, onDown, onUp) {
@@ -14,8 +14,8 @@ var InputHandler = (function() {
         onDown = onDown || null;
         onUp = onUp || null;
 
-        if (this._inputMap.hasOwnProperty(key)) {
-            this._listenerMap[key] = {
+        if (this.inputMap.hasOwnProperty(key)) {
+            this.listenerMap[key] = {
                 handler: handler,
                 ctx: ctx,
                 onDown: onDown,
@@ -28,14 +28,14 @@ var InputHandler = (function() {
         var key;
         var listener = null;
 
-        for (var k in this._inputMap) {
-            if (this._inputMap[k] === code) {
+        for (var k in this.inputMap) {
+            if (this.inputMap[k] === code) {
                 key = k;
             }
         }
 
-        if (this._listenerMap.hasOwnProperty(key)) {
-            listener = this._listenerMap[key];
+        if (this.listenerMap.hasOwnProperty(key)) {
+            listener = this.listenerMap[key];
         }
 
         return listener;

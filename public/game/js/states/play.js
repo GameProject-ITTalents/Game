@@ -13,7 +13,7 @@ var PlayState = (function() {
         this.game.jumpSound = this.game.add.audio('jump');
         this.game.themeSong = this.game.add.audio('song');
         
-        this.game.themeSong.play();
+        // this.game.themeSong.play();
         this.state.start('world_1');
     };
 

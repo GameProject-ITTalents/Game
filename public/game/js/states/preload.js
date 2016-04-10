@@ -9,14 +9,15 @@ var PreloadState = (function() {
     PreloadState.prototype.preload = function() {
         State.prototype.preload.call(this);
 
-        this.load.spritesheet('playersheet', 'assets/sprites/mario_sheet_small.png', 16, 16);
+        this.load.spritesheet('playersheetSmall', 'assets/sprites/mario_sheet_small.png', 16, 16);
+        this.load.spritesheet('playersheetBig', 'assets/sprites/mario_sheet_big.png', 16, 32);
+        this.load.spritesheet('fireballSheet', 'assets/sprites/fireball_sheet.png', 8, 8);
         this.load.tilemap('world_1', 'assets/tilemaps/world_1.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.image('tiles', 'assets/tilemaps/tile_sheet.png');
         this.load.spritesheet('tilesheet', 'assets/tilemaps/tile_sheet.png', 16, 16);
         this.load.audio('bump', 'assets/sounds/smb_bump.wav');
         this.load.audio('jump', 'assets/sounds/smb_jump-small.wav');
         this.load.audio('song', 'assets/sounds/smb_theme_song.mp3');
-
     };
 
     PreloadState.prototype.create = function() {
