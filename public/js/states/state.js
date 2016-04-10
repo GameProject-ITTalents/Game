@@ -2,7 +2,9 @@ var State = (function() {
     function State(game) {
         Phaser.State.call(this, game);
 
-        this.inputHandler = new KeyboardHandler();
+        this.game = game;
+        this.background = null;
+        this.inputHandler = null;
     }
 
     State.prototype = Object.create(Phaser.State.prototype);
@@ -11,6 +13,7 @@ var State = (function() {
     State.prototype.create = function() {
         Phaser.State.prototype.create.call(this);
 
+        this.inputHandler = new KeyboardHandler();
         this.inputHandler.create(this.input);
     };
 

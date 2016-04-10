@@ -21,8 +21,8 @@ var KeyboardHandler = (function() {
         };
 
         for (var i in map) {
-          if (!this._inputMap.hasOwnProperty(i)) {
-             this._inputMap[i] = map[i];
+          if (!this.inputMap.hasOwnProperty(i)) {
+             this.inputMap[i] = map[i];
           }
        }
     };

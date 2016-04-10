@@ -5,89 +5,135 @@ var LevelManager = (function() {
         this.blocksGroup = null;
         this.itemBlocksGroup = null;
         this.coinsGroup = null;
+        this.goombasGroup = null;
+        this.fireballsGroup = null;
 
-        this._level = level;
-        this._game = level.game;
-        this._physics = level.physics;
-        this._inputHandler = level.inputHandler;
-        this._timer = level.timer;
-        this._score = 0;
-        this._scoreImage = this._game.add.sprite(10, 10, 'tilesheet', 57);
-        this._scoreImage.fixedToCamera = true;
-        this._scoreText = this._game.add.text(30, 14, "x 0", {
+        this.level = level;
+        this.game = level.game;
+        this.physics = level.physics;
+        this.inputHandler = level.inputHandler;
+        this.timer = level.timer;
+        this.coins = this.game.coins;
+        this.coinsImage = this.game.add.sprite(10, 10, 'tilesheet', 57);
+        this.coinsImage.fixedToCamera = true;
+        this.coinsText = this.game.add.text(30, 14, "x " + this.coins, {
             font: "12px Arial", 
             fill: "#fff"
         });
-        this._scoreText.fixedToCamera = true;
-        this._lifes = this._game._lifes;
-        this._lifesImage = this._game.add.sprite(60, 10, 'playersheet', 0);
-        this._lifesImage.fixedToCamera = true;
-        this._lifesText = this._game.add.text(80, 14, "x " + this._lifes, {
+        this.coinsText.fixedToCamera = true;
+        this.marios = this.game.marios;
+        this.lifesImage = this.game.add.sprite(60, 10, 'playersheetSmall', 0);
+        this.lifesImage.fixedToCamera = true;
+        this.lifesText = this.game.add.text(80, 14, "x " + this.marios, {
             font: "12px Arial", 
             fill: "#fff"
         });
-        this._lifesText.fixedToCamera = true;
-        this._mainGroup = null;
-        this._entitiesGroup = null;
-        this._collisionLayer = null;
-        this._staticLayer = null;
+        this.lifesText.fixedToCamera = true;
+        this.score = this.game.score;
+        this.scoreText = this.game.add.text(110, 14, "score: " + this.score, {
+            font: "12px Arial", 
+            fill: "#fff"
+        });
+        this.scoreText.fixedToCamera = true;
+        this.mainGroup = null;
+        this.entitiesGroup = null;
+        this.collisionLayer = null;
+        this.enemiesCollisionLayer = null;
+        this.staticLayer = null;
     }
 
     LevelManager.prototype.create = function() {
-        this._mainGroup = this._level.add.group();
-        this._entitiesGroup = this._level.add.group();
-        this._mainGroup.add(this._entitiesGroup);
+        this.mainGroup = this.level.add.group();
+        this.entitiesGroup = this.level.add.group();
+        this.mainGroup.add(this.entitiesGroup);
 
-        // create Map
-        this.map = this._level.add.tilemap(this._level.mapKey);
+        this.map = this.level.add.tilemap(this.level.mapKey);
         this.map.addTilesetImage('tiles', 'tiles');
 
-        this._collisionLayer = this.map.createLayer('collision_layer');
-        this._collisionLayer.visible = false;
-        this._staticLayer = this.map.createLayer('static_layer');
-        this._collisionLayer.resizeWorld();
+        this.collisionLayer = this.map.createLayer('collision_layer');
+        this.collisionLayer.visible = false;
+        this.enemiesCollisionLayer = this.map.createLayer('enemies_collision_layer');
+        this.enemiesCollisionLayer.visible = false;
+        this.staticLayer = this.map.createLayer('static_layer');
+        this.collisionLayer.resizeWorld();
 
-        this.map.setCollision(475, true, this._collisionLayer);
-        this._mainGroup.add(this._staticLayer);
+        this.map.setCollision(475, true, this.collisionLayer);
+        this.map.setCollision(475, true, this.enemiesCollisionLayer);
+        this.mainGroup.add(this.staticLayer);
 
-        // create Map Objects
-        this.blocksGroup = this._level.add.group();
-        this.itemBlocksGroup = this._level.add.group();
-        this.coinsGroup = this._level.add.group();
+        this.blocksGroup = this.level.add.group();
+        this.itemBlocksGroup = this.level.add.group();
+        this.coinsGroup = this.level.add.group();
+        this.goombasGroup = this.level.add.group();
+        this.fireballsGroup = this.level.add.group();
+
+        this.game.fireballsGroup = this.fireballsGroup;
 
         this.map.createFromObjects('block_layer', 2, 'tilesheet', 1, true, false, this.blocksGroup, Block);
         this.map.createFromObjects('itemblock_layer', 25, 'tilesheet', 24, true, false, this.itemBlocksGroup, ItemBlock);
         this.map.createFromObjects('coins_layer', 58, 'tilesheet', 57, true, false, this.coinsGroup, Coin);
-        this.blocksGroup.callAll('setup', null, this._level);
-        this.blocksGroup.callAll('body.setSize', 'body', 10, 16);
-        this.itemBlocksGroup.callAll('setup', null, this._level);
-        this.coinsGroup.callAll('setup', null, this._level);
-        this.blocksGroup.callAll('body.setSize', 'body', 10, 16);
+        this.map.createFromObjects('goombas_layer', 291, 'tilesheet', 290, true, false, this.goombasGroup, Goomba);
 
-        this._mainGroup.add(this.blocksGroup);
-        this._mainGroup.add(this.itemBlocksGroup);
-        this._mainGroup.add(this.coinsGroup);
+        this.fireballsGroup.enableBody = true;
+        this.fireballsGroup.allowGravity = false;
+        this.fireballsGroup.physicsBodyType = Phaser.Physics.ARCADE;
+        this.fireballsGroup.createMultiple(30, 'fireballSheet', 0, false);
+        this.fireballsGroup.setAll('anchor.x', 0.5);
+        this.fireballsGroup.setAll('anchor.y', 0.5);
+        this.fireballsGroup.setAll('outOfBoundsKill', true);
+        this.fireballsGroup.setAll('checkWorldBounds', true);
+        this.fireballsGroup.setAll('body.allowGravity', false);
         
-        this.player = new Player(this._game, 32, this._game.height - 64);
-        this.player.setup(this._level);
-        this._entitiesGroup.add(this.player);
+        this.blocksGroup.callAll('setup', null, this.level);
+        this.blocksGroup.callAll('body.setSize', 'body', 10, 16);
+        this.itemBlocksGroup.callAll('setup', null, this.level);
+        this.coinsGroup.callAll('setup', null, this.level);
+        this.goombasGroup.callAll('setup', null, this.level);
 
-        this._mainGroup.bringToTop(this._entitiesGroup);
+        this.mainGroup.add(this.blocksGroup);
+        this.mainGroup.add(this.itemBlocksGroup);
+        this.mainGroup.add(this.coinsGroup);
+        this.mainGroup.add(this.goombasGroup);
+        
+        this.player = new Player(this.game, 32, this.game.height - 64);
+        this.player.setup(this.level);
+        this.entitiesGroup.add(this.player);
 
-        this._level.camera.follow(this.player, Phaser.FOLLOW_PLATFORMER);
-        this._physics.arcade.gravity.y = this._level.gravity;
+        this.mainGroup.bringToTop(this.entitiesGroup);
+
+        this.level.camera.follow(this.player, Phaser.FOLLOW_PLATFORMER);
+        this.physics.arcade.gravity.y = this.level.gravity;
     };
 
     LevelManager.prototype.update = function() {
-        this._physics.arcade.collide(this.player, this._collisionLayer);
-        this._physics.arcade.collide(this.player, this.blocksGroup, onBlockBump, null, this);
-        this._physics.arcade.collide(this.player, this.itemBlocksGroup, onItemBlockBump, null, this);
-        this._physics.arcade.collide(this.coinsGroup, this.itemBlocksGroup, onCoinBump, null, this);
+        var that = this;
 
-        this.blocksGroup.callAll('update');
-        this.itemBlocksGroup.callAll('update');
-        this._entitiesGroup.callAll('update');
-        this.coinsGroup.callAll('update');
+        that.physics.arcade.collide(that.player, that.collisionLayer);
+        that.physics.arcade.collide(that.player, that.blocksGroup, onBlockBump, null, that);
+        that.physics.arcade.collide(that.player, that.itemBlocksGroup, onItemBlockBump, null, that);
+        that.physics.arcade.collide(that.coinsGroup, that.itemBlocksGroup, onCoinBump, null, that);
+        that.physics.arcade.collide(that.goombasGroup, that.collisionLayer, goombaMove, null, that);
+        that.physics.arcade.collide(that.goombasGroup, that.enemiesCollisionLayer, goombaMove, null, that);
+        that.physics.arcade.collide(that.player, that.goombasGroup, onGoombaBump, null, that);
+
+        that.physics.arcade.overlap(that.fireballsGroup, that.goombasGroup, killEnemy, null, that);
+        that.physics.arcade.overlap(that.fireballsGroup, that.collisionLayer, function(fireball){
+            fireball.kill();
+        }, null, that);
+
+        if (that.player.body.bottom >= that.game.world.bounds.bottom) {
+            looseLife();
+        }
+
+        if (that.player.x > that.level.target) {
+            levelCompleted();
+        }
+
+        that.blocksGroup.callAll('update');
+        that.itemBlocksGroup.callAll('update');
+        that.entitiesGroup.callAll('update');
+        that.coinsGroup.callAll('update');
+        that.goombasGroup.callAll('update');
 
         function onBlockBump(player, block) {
             if (player.body.touching.up) {
@@ -102,22 +148,60 @@ var LevelManager = (function() {
         }
 
         function onCoinBump(coin, itemBlock) {
-            if (itemBlock._bumped) {
+            if (itemBlock.bumped) {
                 coin.bump();
 
-                if (!coin._bumped) {
-                    this._score += 1;
-                    this._scoreText.text = 'x ' + this._score;
+                if (!coin.bumped) {
+                    that.coins += 1;
+                    that.coinsText.text = 'x ' + that.coins;
+                    that.score += 1;
+                    that.scoreText.text = 'score: ' + that.score;
                 }
 
-                coin._bumped = true;
+                coin.bumped = true;
             }
         }
 
-        if (this.player.body.bottom >= this._game.world.bounds.bottom) {
-            this._game.state.start(this._game.state.current);
-            this._game._lifes -= 1;
-            this._lifesText.text = 'x ' + this._lifes;
+        function onGoombaBump(player, goomba) {
+            if (player.body.touching.down) {
+                if (!goomba.bumped) {
+                    goomba.die();
+                    that.score += 1;
+                    that.scoreText.text = 'score: ' + that.score;
+                }
+            } else {
+                looseLife();
+            }
+        }
+
+        function goombaMove(goomba) {
+            goomba.move();
+        }
+
+        function killEnemy(fireball, enemy) {
+            fireball.kill();
+            enemy.kill();
+        }
+
+        function looseLife() {
+            that.game.state.start(that.game.state.current);
+            that.game.marios -= 1;
+            that.game.gamesPlayed += 1;
+            that.lifesText.text = 'x ' + that.marios;
+        }
+
+        function levelCompleted() {
+            that.game.coins = that.coins;
+            that.game.marios = that.marios;
+            that.game.mushrooms = that.game.mushrooms ? that.game.mushrooms - 1 : 0;
+            that.game.shootings = that.game.shootings ? that.game.shootings - 1 : 0;
+            that.game.doubleJumps = that.game.doubleJumps ? that.game.doubleJumps - 1 : 0;
+            that.game.lowGravities = that.game.lowGravities ? that.game.lowGravities - 1 : 0;
+            that.game.gamesPlayed += 1;
+            that.game.score = that.score;
+            that.game.levelReached = that.level.levelId + 1;
+
+            that.game.state.start('levelup');
         }
     };
 

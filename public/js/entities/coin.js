@@ -2,7 +2,7 @@ var Coin = (function() {
     function Coin(game, x, y, key, frame) {
         Entity.call(this, game, x, y, key, frame);
 
-        this._bumped = false;
+        this.bumped = false;
     }
 
     Coin.prototype = Object.create(Entity.prototype);
@@ -16,12 +16,12 @@ var Coin = (function() {
     };
 
     Coin.prototype.bump = function() {
-        if (!this._bumped) {
+        if (!this.bumped) {
             this.alpha = 1;
             this.body.velocity.y = -300;
         }
 
-        if (this._bumped && this.body.touching.down) {
+        if (this.bumped && this.body.touching.down) {
             this.kill();
         }
     };

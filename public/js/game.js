@@ -2,8 +2,16 @@ var Game = (function() {
     function Game() {
         Phaser.Game.call(this, 400, 240, Phaser.AUTO, 'game', null, false, false);
 
-        this._totalScore = 0;
-        this._lifes = 3;
+        this.userId = 0;
+        this.coins = 0;
+        this.marios = 0;
+        this.mushrooms = 0;
+        this.shootings = 0;
+        this.doubleJumps = 0;
+        this.lowGravities = 0;
+        this.gamesPlayed = 0;
+        this.score = 0;
+        this.levelReached = 0;
     }
 
     Game.prototype = Object.create(Phaser.Game.prototype);
@@ -12,10 +20,11 @@ var Game = (function() {
     Game.prototype.boot = function() {
         Phaser.Game.prototype.boot.call(this);
 
-        // set custom resize strategy
+        this.scale.minWidth = this.width;
+        this.scale.minHeight = this.height;
         this.scale.pageAlignHorizontally = true;
         this.scale.pageAlignVertically = true;
-        //this.scale.owerflow = hidden;
+
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.setScreenSize();
 
@@ -29,8 +38,10 @@ var Game = (function() {
     Game.prototype.start = function() {
         this.state.add('preload', PreloadState, true);
         this.state.add('splash', SplashState, false);
-        this.state.add('mainmenu', MenuState, false);
+        this.state.add('menu', MenuState, false);
+        this.state.add('mainmenu', MainMenuState, false);
         this.state.add('play', PlayState, false);
+        this.state.add('levelup', LevelupState, false);
         this.state.add('world_1', WorldOne, false);
     };
 

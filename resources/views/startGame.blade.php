@@ -35,6 +35,8 @@
 <script src="js/states/preload.js"></script>
 <script src="js/states/splash.js"></script>
 <script src="js/states/menu.js"></script>
+<script src="js/states/main_menu.js"></script>
+<script src="js/states/levelup.js"></script>
 <script src="js/states/play.js"></script>
 <script src="js/levels/level.js"></script>
 <script src="js/levels/level_manager.js"></script>
@@ -46,5 +48,6 @@
 <script src="js/entities/item_block.js"></script>
 <script src="js/entities/coin.js"></script>
 <script src="js/entities/player.js"></script>
+<script src="js/entities/goomba.js"></script>
 
 @endsection

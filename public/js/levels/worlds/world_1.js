@@ -1,10 +1,13 @@
 var WorldOne = (function() {
-	var NORMAL_GRAVITY = 960,
-		SKY_BLUE = '#6D93FC';
+	var SKY_BLUE = '#6D93FC',
+		CASTLE_DISTANCE = 3264;
 
 	function WorldOne(game) {
-		Level.call(this, game, NORMAL_GRAVITY);
+		Level.call(this, game);
+
+		this.levelId = 1;
 		this.mapKey = 'world_1';
+		this.target = CASTLE_DISTANCE;
 	}
 
 	WorldOne.prototype = Object.create(Level.prototype);

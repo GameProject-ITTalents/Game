@@ -4,12 +4,10 @@ var MenuState = (function() {
     }
 
     MenuState.prototype = Object.create(State.prototype);
-    MenuState.prototype.constructor = MenuState;
+    MenuState.prototype.constructor = MenuState();
 
     MenuState.prototype.create = function() {
         State.prototype.create.call(this);
-
-        this.state.start('play');
     };
 
     return MenuState;

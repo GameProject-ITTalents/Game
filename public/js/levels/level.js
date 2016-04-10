@@ -1,13 +1,16 @@
 var Level = (function() {
-    function Level(game, gravity) {
+    var NORMAL_GRAVITY = 960,
+        LOW_GRAVITY = 190;
+
+    function Level(game) {
         State.call(this, game);
 
-        this.gravity = gravity;
+        this.gravity = game.lowGravities ? LOW_GRAVITY : NORMAL_GRAVITY;
         this.mapKey = '';
         this.levelManager = null;
         this.timer = null;
 
-        this._player = null;
+        this.player = null;
     }
 
     Level.prototype = Object.create(State.prototype);
@@ -20,42 +23,45 @@ var Level = (function() {
     Level.prototype.create = function() {
         State.prototype.create.call(this);
 
-        // this.timer = new Phaser.Timer(this.game, false);
-        // this.time.add(this.timer);
-
-        // initInputHandler
         this.inputHandler.setInputMap({
             jump: Phaser.Keyboard.C,
-            sprint: Phaser.Keyboard.X
+            sprint: Phaser.Keyboard.X,
+            fire: Phaser.Keyboard.SPACEBAR
+
         });
 
         this.inputHandler.addListener('left', this, onMove);
         this.inputHandler.addListener('right', this, onMove);
         this.inputHandler.addListener('jump', this, null, onJump, onJumpReleased);
         this.inputHandler.addListener('sprint', this, onSprint);
+        this.inputHandler.addListener('fire', this, onFire);
 
         // input listeners
         function onMove(keycode, active) {
             var dir = (keycode === Phaser.Keyboard.LEFT ? Phaser.LEFT : Phaser.RIGHT);
-            this._player.move(dir, active);
+            this.player.move(dir, active);
         }
 
         function onJump(keycode) {
-            this._player.jump();
+            this.player.jump();
         }
 
         function onJumpReleased(keycode) {
-            this._player.jumpReleased = true;
+            this.player.jumpReleased = true;
         }
 
         function onSprint(keycode, active) {
-            this._player.sprint(active);
+            this.player.sprint(active);
+        }
+
+        function onFire(keycode) {
+            this.player.fire();
         }
         
         this.levelManager = new LevelManager(this);
 
         this.levelManager.create();
-        this._player = this.levelManager.player;
+        this.player = this.levelManager.player;
     };
 
     Level.prototype.update = function() {

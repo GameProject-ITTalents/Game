@@ -5,6 +5,8 @@ var Player = (function() {
         PLAYER_DRAG = 165,
         PLAYER_JUMP_SPEED = -385,
         PLAYER_MAX_FALL_SPEED = 320,
+        FIREBALL_SPEED = 240,
+        FIRE_RATE = 300,
 
         PlayerStates = {
             Idle: 0,
@@ -15,20 +17,32 @@ var Player = (function() {
         };
 
     function Player(game, x, y, id) {
-        Entity.call(this, game, x, y, 'playersheet', 0, PLAYER_ACCEL);
+        var playersheet = game.mushrooms ? 'playersheetBig' : 'playersheetSmall';
 
+        Entity.call(this, game, x, y, playersheet, 0);
+
+        this.game = game;
         this.id = id || 0;
+        this.moveSpeed = PLAYER_ACCEL;
         this.maxSpeed = PLAYER_MAX_SPEED;
         this.currentState = PlayerStates.Idle;
         this.jumpReleased = true;
+        this.jumps = 0;
         this.facing = Phaser.RIGHT;
 
-        this._prevFacing = this.facing;
-        this._jumping = false;
-        this._grounded = false;
-        this._sprinting = false;
-        this._turning = false;
-        this._moving = [];
+        this.prevFacing = this.facing;
+        this.jumping = false;
+        this.grounded = false;
+        this.sprinting = false;
+        this.turning = false;
+        this.moving = [];
+
+        this.nextFire = 0;
+        this.fireballSpeed = FIREBALL_SPEED;
+        this.fireRate = FIRE_RATE;
+
+        this.canShoot = !!this.game.shootings;
+        this.fireballsGroup = this.game.fireballsGroup;
 
         this.addAnimations([{ 
                 name: 'walk', 
@@ -42,25 +56,21 @@ var Player = (function() {
     Player.prototype.setup = function(level) {
         Entity.prototype.setup.call(this, level);
 
-        this._velocity = this.body.velocity;
-        this._accel = this.body.acceleration;
+        this.velocity = this.body.velocity;
+        this.accel = this.body.acceleration;
         this.body.maxVelocity.set(this.maxSpeed, this.maxSpeed * 10);
         this.body.drag.set(PLAYER_DRAG, 0);
         this.body.setSize(this.body.width - 2, this.body.height);
         this.body.collideWorldBounds = true;
     };
 
-    Player.prototype.method = function() {
-        Entity.prototype.method.call(this);
-    };
-
     Player.prototype.update = function() {
         var currentAnim = this.animations.currentAnim,
-            delay = Math.min(200, (PLAYER_MAX_SPEED / (Math.abs(this._velocity.x) / 80)));
+            delay = Math.min(200, (PLAYER_MAX_SPEED / (Math.abs(this.velocity.x) / 80)));
 
-        if (this.facing !== this._prevFacing) {
+        if (this.facing !== this.prevFacing) {
             this.flip();
-            this._prevFacing = this.facing;
+            this.prevFacing = this.facing;
         }
 
         switch (this.currentState) {
@@ -74,77 +84,108 @@ var Player = (function() {
             case PlayerStates.Turning:
                 this.frame = 4;
                 break;
-            // case PlayerStates.Idle:
             default:
                 this.frame = 0;
                 break;
         }
 
-        this._grounded = this.body.onFloor() || this.body.touching.down;
+        this.grounded = this.body.onFloor() || this.body.touching.down;
 
-        if (this._moving[Phaser.LEFT] ) {
-            this._accel.x = -this.moveSpeed;
-        } else if (this._moving[Phaser.RIGHT]) {
-            this._accel.x = this.moveSpeed;
+        if (this.moving[Phaser.LEFT] ) {
+            this.accel.x = -this.moveSpeed;
+        } else if (this.moving[Phaser.RIGHT]) {
+            this.accel.x = this.moveSpeed;
         } else {
-            this._accel.x = 0;
-            if (this._velocity.x === 0 && this._grounded) {
+            this.accel.x = 0;
+            if (this.velocity.x === 0 && this.grounded) {
                 this.currentState = PlayerStates.Idle;
             }
         }
 
-        if (this._grounded && !this._turning &&
-                ((this._velocity.x < -PLAYER_MAX_SPEED * 0.6 && this._accel.x > 0) ||
-                (this._velocity.x > PLAYER_MAX_SPEED * 0.6 && this._accel.x < 0))) {
-            this._turning = true;
+        if (this.grounded && !this.turning &&
+                ((this.velocity.x < -PLAYER_MAX_SPEED * 0.6 && this.accel.x > 0) ||
+                (this.velocity.x > PLAYER_MAX_SPEED * 0.6 && this.accel.x < 0))) {
+            this.turning = true;
             this.currentState = PlayerStates.Turning;
         }
 
-        if (Math.abs(this._velocity.x) > 0 && this._grounded && !this._turning) {
+        if (Math.abs(this.velocity.x) > 0 && this.grounded && !this.turning) {
             this.currentState = PlayerStates.Walking;
         }
 
-        if (this._grounded && this._jumping && !this._turning) {
-            this._jumping = false;
+        if (this.grounded && this.jumping && !this.turning) {
+            this.jumping = false;
             this.currentState = PlayerStates.Idle;
+            this.jumps = 0;
         }
 
-        if (this._jumping && this.jumpReleased &&
-                this._velocity.y < PLAYER_JUMP_SPEED / 4) {
-            this._velocity.y = PLAYER_JUMP_SPEED / 4;
+        if (this.jumping && this.jumpReleased &&
+                this.velocity.y < PLAYER_JUMP_SPEED / 4) {
+            this.velocity.y = PLAYER_JUMP_SPEED / 4;
         }
 
-        this._velocity.y = Math.min(this._velocity.y, PLAYER_MAX_FALL_SPEED);
+        this.velocity.y = Math.min(this.velocity.y, PLAYER_MAX_FALL_SPEED);
     };
 
     Player.prototype.jump = function() {
-        if (this._grounded && !this._jumping && this.jumpReleased) {
-            this.jumpReleased = false;
-            this._jumping = true;
-            this._turning = false;
-            this.currentState = PlayerStates.Jumping;
-            this._velocity.y = PLAYER_JUMP_SPEED;
-            this.game.jumpSound.play();
+        var that = this;
+
+        if (that.game.doubleJumps && that.jumps < 2 && that.jumpReleased) {
+            doJump();
+            that.jumps += 1;
+        }
+
+        if (that.grounded && !that.jumping && that.jumpReleased) {
+            doJump();
+        }
+
+        function doJump() {
+            that.jumpReleased = false;
+            that.jumping = true;
+            that.turning = false;
+            that.currentState = PlayerStates.Jumping;
+            that.velocity.y = PLAYER_JUMP_SPEED;
+            that.game.jumpSound.play();
         }
     };
 
     Player.prototype.sprint = function(active) {
-        if (!this._jumping && Math.abs(this._accel.x) > 0 && active) {
+        if (!this.jumping && Math.abs(this.accel.x) > 0 && active) {
             this.body.maxVelocity.x = PLAYER_MAX_SPRINT_SPEED;
         } else if (!active) {
             this.body.maxVelocity.x = this.maxSpeed;
         }
 
-        this._sprinting = active;
+        this.sprinting = active;
     };
 
     Player.prototype.move = function(direction, active) {
-        this._turning = false;
-        this._moving[direction] = active;
+        this.turning = false;
+        this.moving[direction] = active;
 
-        if (!this._jumping) {
+        if (!this.jumping) {
             this.currentState = PlayerStates.Walking;
             this.facing = direction;
+        }
+    };
+
+    Player.prototype.fire = function() {
+        var fireball;
+
+        if (this.canShoot && this.game.time.now > this.nextFire) {
+            this.nextFire = this.game.time.now + this.fireRate;
+
+            if (this.fireballsGroup.countDead() > 0) {
+
+                fireball = this.fireballsGroup.getFirstExists(false);
+                fireball.reset(this.x, this.y);
+            }
+
+            if (this.facing == Phaser.RIGHT) {
+                fireball.body.velocity.x = this.fireballSpeed;
+            } else {
+                fireball.body.velocity.x = -this.fireballSpeed;
+            }
         }
     };
 

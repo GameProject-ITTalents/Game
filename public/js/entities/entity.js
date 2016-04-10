@@ -1,8 +1,7 @@
 var Entity = (function() {
-    function Entity(game, x, y, key, frame, moveSpeed) {
+    function Entity(game, x, y, key, frame) {
         Phaser.Sprite.call(this, game, x, y, key, frame);
 
-        this.moveSpeed = moveSpeed || 0;
         this.facing = Phaser.LEFT;
     }
 
