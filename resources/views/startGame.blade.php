@@ -25,7 +25,7 @@
 </style>
 {{ csrf_field() }}
 <div class="container-fluid">
-<div class="col-md-12 pull-right" id="game"></div>
+<div class="col-md-10 pull-right" id="game"></div>
 </div>
 <script src="js/phaser.min.js"></script>
 <script src="js/jquery.js"></script>
@@ -35,8 +35,6 @@
 <script src="js/states/preload.js"></script>
 <script src="js/states/splash.js"></script>
 <script src="js/states/menu.js"></script>
-<script src="js/states/main_menu.js"></script>
-<script src="js/states/levelup.js"></script>
 <script src="js/states/play.js"></script>
 <script src="js/levels/level.js"></script>
 <script src="js/levels/level_manager.js"></script>

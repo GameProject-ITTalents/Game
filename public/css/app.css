@@ -1,8 +1,19 @@
 body {
-  background: url(../img/SuperMario.jpg) no-repeat center right fixed;
+  background: url(../img/SuperMario2.jpg) no-repeat center right fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 /*# sourceMappingURL=app.css.map */
 
-h1, h3 {
+h1, h2, h3 {
   font-family: 'Carter One';
+}
+
+.btn span.glyphicon {
+  opacity: 0;
+}
+.btn.active span.glyphicon {
+  opacity: 1;
 }

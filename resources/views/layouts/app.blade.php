@@ -19,6 +19,7 @@
     <link href="/css/bootstrap.css" rel="stylesheet">
     {{--<link rel="stylesheet" href="css/landing-page.css" type="text/css">--}}
     <link rel="stylesheet" href="css/app.css" type="text/css">
+    <link rel="stylesheet" href="../css/app.css" type="text/css">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
 

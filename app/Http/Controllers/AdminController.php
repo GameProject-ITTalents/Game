@@ -34,7 +34,7 @@ class AdminController extends Controller
         }
     }
 
-    public function createAdmin(Request $request)
+    /*public function createAdmin(Request $request)
     {
         if ($request->isMethod('post'))
         {
@@ -83,7 +83,7 @@ class AdminController extends Controller
             }
         }
         return View('admin.createAdmin');
-    }
+    }*/
 
     public function viewAllUsers($sortingMethod)
     {

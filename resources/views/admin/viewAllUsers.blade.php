@@ -51,7 +51,9 @@
                     <label for="">Posts  </label>  {{ $comments }}
                     <a href="{{ url('/forum/' . $user->id) }}"> See all posts</a>
                     <br>
+                    @if (Auth::user()->id == $user->id)
                     <a href="{{url('user/profile/' . $user->id)}}" class="btn btn-success">Edit User</a>
+                    @endif
                     <a href="{{url('user/delete/' . $user->id)}}" class="btn btn-danger">Delete User</a>
                     @if ($user->user == 0)
                         <a href="{{url('user/makeAdmin/' . $user->id)}}" class="btn btn-primary">Make Admin</a>

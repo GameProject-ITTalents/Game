@@ -37,10 +37,10 @@
                             <form class="panel" id="form3" method="post" action="{{url('user/updateInfo')}}">
                                 {{csrf_field()}}
                                 <label>Name</label>
-                                <input type="text" class="form-control" placeholder="{{$user->name}}">
+                                <input name="name" type="text" class="form-control" placeholder="{{$user->name}}">
                                 <br>
                                 <label>Email</label>
-                                <input type="text" class="form-control" placeholder="{{$user->email}}">
+                                <input name="email" type="text" class="form-control" placeholder="{{$user->email}}">
                                 <br>
                                 <button type="submit" form="form3" class="btn btn-success">Change Info</button>
                                 <br>

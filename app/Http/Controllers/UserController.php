@@ -77,8 +77,11 @@ class UserController extends Controller
             return redirect('user/profile/' . Auth::user()->id)->withErrors($validator);
         } else {
             $user = new User;
-            $user->where('email', '=', Auth::user()->email)
-                ->update(['name' => $request->name]);
+            $user->where('id', Auth::user()->id)
+                ->update([
+                    'name' => $request->name,
+                    'email' => $request->email
+                ]);
             /*$user->where('email', '=', Auth::user()->email)
                 ->update(['email' => $request->email]);*/
 
@@ -181,19 +184,52 @@ class UserController extends Controller
     public function createUser(Request $request)
     {
         if (Auth::user()->user == 1) {
-            $name = str_random(30) . '-' . $request->file('image')->getClientOriginalName();
-            $request->file('image')->move('profile', $name);
-            $user = new User;
-            $user->avatar = 'profile/' . $name;
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->password = bcrypt($request->password);
-            $user->user = $request->admin;
+            $rules = [
+                'name' => 'required|min:3|max:16|regex:/^[a-záéíóúä\s]+$/i',
+                'email' => 'required|email|max:63|unique:users,email',
+                'password' => 'required|min:6|max:118'
+            ];
 
-            $user->save();
-            
-        } 
-        return redirect('/viewAllUsers/0');
+            $messages = [
+                'name.required' => 'Required field',
+                'name.max' => 'Max limit of characters reached',
+                'name.min' => 'Name must be at least 3 characters long',
+                'name.regex' => 'Symbols not allowed',
+                'email.required' => 'Required field',
+                'email.email' => 'Email must be in correct format',
+                'email.unique' => 'Email must be unique',
+                'email.max' => 'Max limit of characters reached',
+                'password.required' => 'Required field',
+                'password.min' => 'Password must be at least 6 characters long',
+                'password.max' => 'Max limit of characters reached'
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+
+            if($validator->fails()) {
+                return redirect()->back()->withErrors($validator);
+            } else {
+
+                $user = new User;
+                if($request->file('image')) {
+                    $name = str_random(30) . '-' . $request->file('image')->getClientOriginalName();
+                    $request->file('image')->move('profile', $name);
+                    $user->avatar = 'profile/' . $name;
+                } else {
+                    $user->avatar = 'profile/profile.jpg';
+                }
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->password = bcrypt($request->password);
+                if ($request->admin) {
+                    $user->user = $request->admin;
+                } else {
+                    $user->user = 0;
+                }
+                $user->save();
+            }
+        }
+        return redirect('/viewAllUsers/0')->with('status', 'User created');
     }
 
     public function deleteUser($id)

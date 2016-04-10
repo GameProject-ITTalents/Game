@@ -9,8 +9,9 @@
                     <img src="{{url($user->avatar)}}" style="width: 200px" class="img-rounded img-responsive" />
                     <br />
                     <div class="alert alert-info">
-                        <label>Title Reached</label>
-                        <h3>{{$user->name}}</h3>
+                        <label>Player</label>
+                        <hr>
+                        <h4>{{$user->name}}</h4>
                     </div>
 
                 </div>
@@ -54,19 +55,88 @@
                         <hr>
                         <label>Wallet:</label>   {{ $user->coins }}
                         <br><br>
-                        <label>Mario:</label>   {{ $user->mario }}</p>
-                        <label>Mushroom:</label>   {{ $user->mushroom }}</p>
-                        <label>Shooting:</label>   {{ $user->shooting }}</p>
-                        <label>Double Jump:</label>   {{ $user->double_jump }}</p>
-                        <label>Low Gravity:</label>   {{ $user->low_gravity }}</p>
+
+                        <div>
+                            <table class="table">
+                                <tr>
+                                    <td><h4>Mario : </h4></td>
+                                    <td>
+                                        <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-info
+                                        <?php if($user->mario == 1): ?>
+                                                active
+                                                <?php endif; ?>
+                                                ">
+                                            <input type="checkbox">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                        </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><h4>Mushroom : </h4></td>
+                                    <td>
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-info
+                                        <?php if($user->mushroom == 1): ?>
+                                                    active
+                                                    <?php endif; ?>
+                                                    ">
+                                                <input type="checkbox">
+                                                <span class="glyphicon glyphicon-ok"></span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><h4>Shooting : </h4></td>
+                                    <td>
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-info
+                                        <?php if($user->shooting == 1): ?>
+                                                    active
+                                                    <?php endif; ?>
+                                                    ">
+                                                <input type="checkbox">
+                                                <span class="glyphicon glyphicon-ok"></span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><h4>Double Jump : </h4></td>
+                                    <td>
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-info
+                                        <?php if($user->double_jump == 1): ?>
+                                                    active
+                                                    <?php endif; ?>
+                                                    ">
+                                                <input type="checkbox">
+                                                <span class="glyphicon glyphicon-ok"></span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><h4>Low Gravity : </h4></td>
+                                    <td>
+                                        <div class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-info
+                                        <?php if($user->low_gravity == 1): ?>
+                                                    active
+                                                    <?php endif; ?>
+                                                    ">
+                                                <input type="checkbox">
+                                                <span class="glyphicon glyphicon-ok"></span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
                     </div>
-                    {{--<div class="form-group col-md-8">
-                        <h3>Forum Activity</h3>
-                        <br />
-                        <label>Post Title</label>
-                        <p class="form-control"></p>
-                        <br>
-                    </div>--}}
                 </div>
             </div>
             <!-- ROW END -->

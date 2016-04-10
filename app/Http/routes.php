@@ -14,6 +14,7 @@
 /*Route::get('/', function() {
     return view ('home');
 });*/
+
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 
@@ -35,7 +36,6 @@ Route::post('/showUserData', 'DevController@showUserData');
 Route::post('/user/updateProfile','UserController@updateProfile');
 Route::post('/user/updatePassword','UserController@updatePassword');
 Route::post('/user/updateInfo','UserController@updateInfo');
-//Route::post('/user/createComment','UserController@createComment');
 
 Route::get('admin/panel', 'AdminController@admin');
 
@@ -75,7 +75,6 @@ Route::get('/about', 'HomeController@about');
 //GAME
 Route::get('/startGame', 'HomeController@startGame');
 Route::get('/userInfo', 'HomeController@userInfo');
-//Route::post('/userRequest', 'HomeController@userRequest');
 
 Route::get('/highScore', 'HomeController@highScore');
 
@@ -83,7 +82,4 @@ Route::get('/highScore', 'HomeController@highScore');
 Route::resource('/dev', 'DevController');
 Route::post('/userRequest', 'DevController@userRequest');
 
-Route::get('/test', function() {
-   return view('test');
-});
 
