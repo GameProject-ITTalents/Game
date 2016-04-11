@@ -2,7 +2,7 @@
 
 @section('content')
     <br>
-    <div class="container">
+    <div class="container" style="background-color: rgba(36,75,84,0.15)">
         <section style="padding-bottom: 50px; padding-top: 50px;">
             <div class="row">
                 <div class="col-md-4">
@@ -46,98 +46,36 @@
                         @endif
                     </div>
                     @endif
+
+
                     <div class="form-group col-md-8">
                         <h3>Gamer Info</h3>
                         <br>
-                        <div class="col-md-6"><h4>Games Played : </h4></div>
-                        <div class="col-md-6">{{ $user->games_played }}</div>
+                        <div class="col-md-8"><h4>Games Played : </h4></div>
+                        <div class="col-md-4" style="color: #31AFD4"><h3>{{ $user->games_played }}</h3></div>
                         <br><br>
-                        <div class="col-md-6"><h4>Highest Score : </h4></div>
-                        <div class="col-md-6">{{$user->highest_score}}</div>
-                        {{--  <label>Games Played:</label>   {{ $user->games_played }}
+                        <div class="col-md-8"><h4>Highest Score : </h4></div>
+                        <div class="col-md-4" style="color: #31AFD4"><h3>{{$user->highest_score}}</h3></div>
                         <br>
-                        <label>Highest Score:</label>   {{ $user->highest_score }}--}}
-                        <hr>
+                        <div class="col-md-8"><h4>Wallet : </h4></div>
+                        <div class="col-md-4" style="color: #31AFD4"><h3>{{ $user->coins }}</h3></div>
+                        <br><br>
 
-                        @if (Auth::user()->id == $user->id || Auth::user()->user == 1)
-                        <div class="col-md-6"><h4>Wallet : </h4></div>
-                        <div class="col-md-6">{{ $user->coins }}</div>
-                        @endif
-                            <br><br>
-
-                        <div class="col-md-6"><h4>Mario : </h4></div>
-                        <div class="col-md-6">{{$user->mario}}</div>
-                        
-                        {{--<label>Mario : </label>{{$user->mario}}--}}
-                        </div>
-
-
-                        <div class="col-md-8">
-                            <table class="table">
-
-                                <tr>
-                                    <td><h4>Mushroom : </h4></td>
-                                    <td>
-                                        <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-info
-                                        <?php if($user->mushroom == 1): ?>
-                                                    active
-                                                    <?php endif; ?>
-                                                    ">
-                                                <input type="checkbox" disabled="disabled">
-                                                <span class="glyphicon glyphicon-ok"></span>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><h4>Shooting : </h4></td>
-                                    <td>
-                                        <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-info
-                                        <?php if($user->shooting == 1): ?>
-                                                    active
-                                                    <?php endif; ?>
-                                                    ">
-                                                <input type="checkbox">
-                                                <span class="glyphicon glyphicon-ok"></span>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><h4>Double Jump : </h4></td>
-                                    <td>
-                                        <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-info
-                                        <?php if($user->double_jump == 1): ?>
-                                                    active
-                                                    <?php endif; ?>
-                                                    ">
-                                                <input type="checkbox">
-                                                <span class="glyphicon glyphicon-ok"></span>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><h4>Low Gravity : </h4></td>
-                                    <td>
-                                        <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-info
-                                        <?php if($user->low_gravity == 1): ?>
-                                                    active
-                                                    <?php endif; ?>
-                                                    ">
-                                                <input type="checkbox">
-                                                <span class="glyphicon glyphicon-ok"></span>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            </table>
-                        </div>
+                        <div class="col-md-8"><h4>Mario : </h4></div>
+                        <div class="col-md-4" style="color: #31AFD4"><h3>{{$user->mario}}</h3></div>
+                        <br>
+                        <div class="col-md-8"><h4>Mushroom : </h4></div>
+                        <div class="col-md-4" style="color: #31AFD4"><h3>{{$user->mushroom}}</h3></div>
+                        <br>
+                        <div class="col-md-8"><h4>Shooting : </h4></div>
+                        <div class="col-md-4" style="color: #31AFD4"><h3>{{$user->shooting}}</h3></div>
+                        <br>
+                        <div class="col-md-8"><h4>Double Jump : </h4></div>
+                        <div class="col-md-4" style="color: #31AFD4"><h3>{{$user->double_jump}}</h3></div>
+                        <br>
+                        <div class="col-md-8"><h4>Low Gravity : </h4></div>
+                        <div class="col-md-4" style="color: #31AFD4"><h3>{{$user->low_gravity}}</h3></div>
+                        <br>
                     </div>
                 </div>
             </div>

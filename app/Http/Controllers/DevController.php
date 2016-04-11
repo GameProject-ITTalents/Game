@@ -42,7 +42,9 @@ class DevController extends Controller
         $score = $request->score;
         $level_reached = $request->level_reached;
 
-        //dd($coins);
+        if ($score > $highest_score) {
+            $highest_score = $score;
+        }
 
         User::where('id', $id)
             ->update([
