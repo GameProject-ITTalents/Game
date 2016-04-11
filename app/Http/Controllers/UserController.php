@@ -10,6 +10,7 @@ use DB;
 use Validator;
 use Hash;
 use App\Comments;
+use App\Transaction;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -135,11 +136,6 @@ class UserController extends Controller
     {
         $user = DB::table('users')->where('id', Auth::user()->id)->first();
         $array = json_decode($items);
-        /*$mario = 0;
-        $mushroom = 0;
-        $shooting = 0;
-        $double_jump = 0;
-        $low_gravity = 0;*/
         if ($total <= $user->coins) {
             $coins = $user->coins - $total;
             $mario = $user->mario;
@@ -165,6 +161,17 @@ class UserController extends Controller
                         $low_gravity++;
                 }
             }
+            $transaction = new Transaction;
+            $transaction->buyer_id = Auth::user()->id;
+            $transaction->objects = $items;
+            $transaction->date = date('Y-m-d');
+            $transaction->time = date('H:i:s');
+            $transaction->save();
+
+            $cart_id = DB::table('carts')->where('user_id', Auth::user()->id)->first()->id;
+            DB::table('cart_items')->where('cart_id', $cart_id)->delete();
+
+
             User::where('id', $user->id)
                 ->update([
                     'coins' => $coins,
@@ -174,7 +181,7 @@ class UserController extends Controller
                     'double_jump' => $double_jump,
                     'low_gravity' => $low_gravity
                 ]);
-            return redirect('/cart');
+            return redirect('/shop');
         }
         else {
             return redirect('/buyCoins');

@@ -1,10 +1,9 @@
 <html>
 <head>
     <title>Super Mario E-SHOP</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -33,9 +32,14 @@
                         <li><a href="/auth/login">Login</a></li>
                         <li><a href="/auth/register">Signup</a></li>
                     @else
-                        {{--<li><a href="/order">My Order <span class="fa fa-briefcase"></span></a></li>--}}
                         @if(Auth::user()->user == 0)
-                        <li><a href="{{ url('/cart') }}">Cart <span class="fa fa-shopping-cart"></span></a></li>
+                        <li>
+                            <?php
+                                $cart_id = DB::table('carts')->where('user_id', Auth::user()->id)->first()->id;
+                            $count = DB::table('cart_items')->where('cart_id', $cart_id)->count();
+                                ?>
+                            <a href="{{ url('/cart') }}">Cart  <span class="fa fa-shopping-cart"></span> {{ $count }} items</a>
+                        </li>
                         @endif
                         <li><a href="{{ url('/logout') }}">Logout {{ Auth::user()->name}}</a></li>
                         <li><a href="{{ url('/buyCoins') }}">{{ Auth::user()->coins }} coins  </a></li>
@@ -48,6 +52,10 @@
 
 <div class="container">
     @yield('content')
+            <!-- JavaScripts -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </div>
 </body>
 </html>

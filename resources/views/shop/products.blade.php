@@ -10,7 +10,7 @@
 
     <div class="container" style="margin-top: 60px">
         <div class="col-md-12">
-            <table class="table table-striped panel-info"">
+            <table class="table table-striped panel-info">
                 <thead  class="panel-heading">
                 <th class="panel-title">Objects</th>
                 <th>Name</th>
@@ -19,12 +19,12 @@
                 @if (Auth::user()->user == 0)
                     <th>Amount</th>
                 @else
-                    <td></td>
+                    <th></th>
                 @endif
                 @if (Auth::user()->user == 1)
                     <th>Modifications</th>
                     @else
-                    <td></td>
+                    <th> </th>
                 @endif
                 </thead>
                 <tbody class="panel-body">

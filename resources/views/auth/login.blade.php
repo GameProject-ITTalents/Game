@@ -7,7 +7,7 @@
             <div class="panel panel-default" style="background-color: rgba(36,75,84,0.15)">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                    <form class="form-horizontal" novalidate role="form" method="POST" action="{{ url('/login') }}">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -54,7 +54,9 @@
                                     <i class="fa fa-btn fa-sign-in"></i>Login
                                 </button>
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                                <br /><br />
+                                <br /><br>
+                                <a class="btn btn-link" href="{{ url('/register') }}">Don't have an account?</a>
+                                <br /><br>
                                 <a class="btn btn-link" href="{{ url('social/facebook') }}">Login with Facebook</a>
                                 <br />
                                 <a class="btn btn-link" href="{{ url('social/google') }}">Login with Google</a>

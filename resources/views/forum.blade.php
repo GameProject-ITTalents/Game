@@ -41,7 +41,7 @@
                     <strong>{{ $user->name }}</strong>
                 </div>
                 <div class="col-md-8" style="max-width: 600px">
-                    <div class="col-md-12">{{ $comment->comment }} </div>
+                    <div class="col-md-12">{{ wordwrap($comment->comment, 50, "\n", true) }} </div>
                     <i>On: {{ $comment->date }} at: {{ $comment->time }}</i>
                     <br><br>
                     {{--<a href="{{ url('/forum/' . $comment->id) }}"><button class="btn btn-success">Edit Post</button></a>
@@ -55,7 +55,7 @@
                                         <h4 class="modal-title" id="myModalLabel">Are you sure you want to delete the post?</h4>
                                     </div>
                                     <div class="modal-body">
-                                        {{$comment->comment}}
+                                        {{ wordwrap($comment->comment, 70, "\n", true) }}
                                     </div>
                                     <div class="modal-footer">
                                         <div class="pull-left">
@@ -77,7 +77,7 @@
                                     </div>
                                     <div class="modal-body">
                                             {{ Form::open(['method' => 'put', 'route' => ['forum.update', $comment->id]]) }}
-                                            {{ Form::text('comment', $comment->comment, ['style' => 'width: 100%']) }}
+                                            {{ Form::textarea('comment', $comment->comment, ['style' => 'width: 100%']) }}
                                     </div>
                                     <div class="modal-footer">
                                         <div class="pull-left">

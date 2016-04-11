@@ -48,19 +48,31 @@
                     @endif
                     <div class="form-group col-md-8">
                         <h3>Gamer Info</h3>
-                        <br />
-                        <label>Games Played:</label>   {{ $user->games_played }}
                         <br>
-                        <label>Highest Score:</label>   {{ $user->highest_score }}
-                        <hr>
-                        <label>Wallet:</label>   {{ $user->coins }}
+                        <div class="col-md-6"><h4>Games Played : </h4></div>
+                        <div class="col-md-6">{{ $user->games_played }}</div>
                         <br><br>
+                        <div class="col-md-6"><h4>Highest Score : </h4></div>
+                        <div class="col-md-6">{{$user->highest_score}}</div>
+                        {{--  <label>Games Played:</label>   {{ $user->games_played }}
+                        <br>
+                        <label>Highest Score:</label>   {{ $user->highest_score }}--}}
+                        <hr>
 
-                       <h4>Mario : </h4>{{$user->mario}}
+                        @if (Auth::user()->id == $user->id || Auth::user()->user == 1)
+                        <div class="col-md-6"><h4>Wallet : </h4></div>
+                        <div class="col-md-6">{{ $user->coins }}</div>
+                        @endif
+                            <br><br>
+
+                        <div class="col-md-6"><h4>Mario : </h4></div>
+                        <div class="col-md-6">{{$user->mario}}</div>
+                        
+                        {{--<label>Mario : </label>{{$user->mario}}--}}
                         </div>
 
 
-                        <div>
+                        <div class="col-md-8">
                             <table class="table">
 
                                 <tr>
@@ -72,7 +84,7 @@
                                                     active
                                                     <?php endif; ?>
                                                     ">
-                                                <input type="checkbox">
+                                                <input type="checkbox" disabled="disabled">
                                                 <span class="glyphicon glyphicon-ok"></span>
                                             </label>
                                         </div>

@@ -10,10 +10,3 @@ body {
 h1, h2, h3 {
   font-family: 'Carter One';
 }
-
-.btn span.glyphicon {
-  opacity: 0;
-}
-.btn.active span.glyphicon {
-  opacity: 1;
-}

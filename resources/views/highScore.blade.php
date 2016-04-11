@@ -23,7 +23,7 @@
                             @foreach($highestScores as $user)
                             <tr>
                                 <td><?= $position++; ?></td>
-                                <td><a href="{{url('user/profile/' . $user->id)}}">{{$user->name}}</a></td>
+                                <td><a href="{{url('user/' . $user->id)}}">{{$user->name}}</a></td>
                                 <td>{{$user->highest_score}}</td>
                                 <td>{{$user->games_played}}</td>
                             </tr>

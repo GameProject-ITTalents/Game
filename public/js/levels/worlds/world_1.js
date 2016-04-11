@@ -1,6 +1,6 @@
 var WorldOne = (function() {
 	var SKY_BLUE = '#6D93FC',
-		CASTLE_DISTANCE = 100;
+		CASTLE_DISTANCE = 3264;
 
 	function WorldOne(game) {
 		Level.call(this, game);

@@ -15,9 +15,7 @@
     <link href='https://fonts.googleapis.com/css?family=Carter+One' rel='stylesheet' type='text/css'>
 
     <!-- Styles -->
-   {{-- <link href="../css/bootstrap.min.css" rel="stylesheet">--}}
-    <link href="/css/bootstrap.css" rel="stylesheet">
-    {{--<link rel="stylesheet" href="css/landing-page.css" type="text/css">--}}
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/app.css" type="text/css">
     <link rel="stylesheet" href="../css/app.css" type="text/css">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
@@ -55,8 +53,8 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <form action="{{--search.php--}}" method="post" class="navbar-form" role="search">
+                    {{--<li>
+                        <form action="--}}{{--search.php--}}{{--" method="post" class="navbar-form" role="search">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search" name="search" id="srch-term">
                                 <div class="input-group-btn">
@@ -65,7 +63,7 @@
                             </div>
                         </form>
                     </li>
-                    <li><a href="{{ url('/') }}">language</a></li>
+                    <li><a href="{{ url('/') }}">language</a></li>--}}
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
@@ -93,9 +91,8 @@
     @yield('content')
 
     <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
 </html>
