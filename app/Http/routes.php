@@ -65,6 +65,8 @@ Route::get('/cart', 'CartController@showCart');
 
 Route::resource('total.items', 'UserController');
 
+/*Route::resource('products', 'ProductController');*/
+
 //FORUM
 Route::resource('/forum', 'PostsController');
 

@@ -5,16 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Comments;
-use Auth;
 
-class PostsController extends Controller
+class ProductController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +15,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('forum');
+        //
     }
 
     /**
@@ -41,18 +34,22 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($objectId)
     {
-        $comment = e($request->comment);
-        $date = date('Y-m-d');
-        $time = date('H:i:s');
-        Comments::insert([
-            'comment' => $comment,
-            'id_user' => Auth::user()->id,
-            'date' => $date,
-            'time' => $time,
-        ]);
-        return redirect('/forum')->with('status', 'Post published');
+        $cart = Cart::where('user_id', Auth::user()->id)->first();
+
+        if(!$cart){
+            $cart =  new Cart();
+            $cart->user_id = Auth::user()->id;
+            $cart->save();
+        }
+
+        $cartItem  = new CartItem();
+        $cartItem->object_id = $objectId;
+        $cartItem->cart_id = $cart->id;
+        $cartItem->save();
+
+        return redirect('/cart');
     }
 
     /**
@@ -63,8 +60,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $comments = Comments::where('id_user', $id)->get();
-        return view('admin.postsByUsers', compact('comments'));
+        //
     }
 
     /**
@@ -75,10 +71,9 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $comment = Comments::findOrFail($id);
-        return view('admin.editPost', compact('comment'));
+        //
     }
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -88,10 +83,7 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $comment = e($request->comment);
-        Comments::where('id', $id)
-                ->update(['comment' => $comment]);
-        return redirect('/forum')->with('updateStatus', 'Post updated');
+        //
     }
 
     /**
@@ -102,9 +94,6 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        $post = Comments::findOrFail($id);
-        $post->delete();
-
-        return redirect('/forum')->with('deletionStatus', 'Post deleted');
+        //
     }
 }

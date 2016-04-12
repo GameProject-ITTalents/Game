@@ -46,41 +46,48 @@
                         @endif
                     </div>
                     @endif
-
-
-                    <div class="form-group col-md-8">
-                        <h3>Gamer Info</h3>
-                        <br>
-                        <div class="col-md-8"><h4>Games Played : </h4></div>
-                        <div class="col-md-4" style="color: #31AFD4"><h3>{{ $user->games_played }}</h3></div>
-                        <br><br>
-                        <div class="col-md-8"><h4>Highest Score : </h4></div>
-                        <div class="col-md-4" style="color: #31AFD4"><h3>{{$user->highest_score}}</h3></div>
-                        <br>
-                        <div class="col-md-8"><h4>Wallet : </h4></div>
-                        <div class="col-md-4" style="color: #31AFD4"><h3>{{ $user->coins }}</h3></div>
-                        <br><br>
-
-                        <div class="col-md-8"><h4>Mario : </h4></div>
-                        <div class="col-md-4" style="color: #31AFD4"><h3>{{$user->mario}}</h3></div>
-                        <br>
-                        <div class="col-md-8"><h4>Mushroom : </h4></div>
-                        <div class="col-md-4" style="color: #31AFD4"><h3>{{$user->mushroom}}</h3></div>
-                        <br>
-                        <div class="col-md-8"><h4>Shooting : </h4></div>
-                        <div class="col-md-4" style="color: #31AFD4"><h3>{{$user->shooting}}</h3></div>
-                        <br>
-                        <div class="col-md-8"><h4>Double Jump : </h4></div>
-                        <div class="col-md-4" style="color: #31AFD4"><h3>{{$user->double_jump}}</h3></div>
-                        <br>
-                        <div class="col-md-8"><h4>Low Gravity : </h4></div>
-                        <div class="col-md-4" style="color: #31AFD4"><h3>{{$user->low_gravity}}</h3></div>
-                        <br>
-                    </div>
                 </div>
             </div>
             <!-- ROW END -->
-
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <div class="col-md-4">
+                        <h3>Gamer Info</h3>
+                        <br>
+                        <div class="col-md-9"><h4>Games Played : </h4></div>
+                        <div class="col-md-3" style="color: #31AFD4">
+                            <h3 style="margin: 0">{{ $user->games_played }}</h3>
+                        </div>
+                        <br><br>
+                        <div class="col-md-9"><h4>Highest Score : </h4></div>
+                        <div class="col-md-3" style="color: #31AFD4">
+                            <h3  style="margin: 0">{{$user->highest_score}}</h3>
+                        </div>
+                        <br>
+                        <div class="col-md-9"><h4>Wallet : </h4></div>
+                        <div class="col-md-3" style="color: #31AFD4">
+                            <h3  style="margin: 0">{{ $user->coins }}</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <br><br>
+                        <div class="col-md-8"><h4>Mario : </h4></div>
+                        <div class="col-md-4" style="color: #31AFD4"><h3  style="margin: 0">{{$user->mario}}</h3></div>
+                        <br>
+                        <div class="col-md-8"><h4>Mushroom : </h4></div>
+                        <div class="col-md-4" style="color: #31AFD4"><h3  style="margin: 0">{{$user->mushroom}}</h3></div>
+                        <br>
+                        <div class="col-md-8"><h4>Shooting : </h4></div>
+                        <div class="col-md-4" style="color: #31AFD4"><h3  style="margin: 0">{{$user->shooting}}</h3></div>
+                        <br>
+                        <div class="col-md-8"><h4>Double Jump : </h4></div>
+                        <div class="col-md-4" style="color: #31AFD4"><h3  style="margin: 0">{{$user->double_jump}}</h3></div>
+                        <br>
+                        <div class="col-md-8"><h4>Low Gravity : </h4></div>
+                        <div class="col-md-4" style="color: #31AFD4"><h3  style="margin: 0">{{$user->low_gravity}}</h3></div>
+                    </div>
+                </div>
+            </div>
 
         </section>
         <!-- SECTION END -->

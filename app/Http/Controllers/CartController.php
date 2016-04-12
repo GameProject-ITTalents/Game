@@ -33,7 +33,7 @@ class CartController extends Controller
         $cartItem->cart_id = $cart->id;
         $cartItem->save();
 
-        return redirect('/cart');
+        return redirect('/cart')->with('additionStatus', 'Power-up added to the cart');
     }
 
     public function showCart(){

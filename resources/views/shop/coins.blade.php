@@ -10,6 +10,12 @@
 
     <div class="container" style="margin-top: 60px">
         <div class="col-md-8 panel-info">
+            @if (Session::has('status'))
+                <div class="bg-warning" style="padding: 20px">
+                    {{ Session::get('status') }}
+                </div>
+                <hr>
+            @endif
             <div><a href="{{ url('/shop') }}">Back to the e-shop</a></div>
             <div class="panel-heading">
                 <div class="panel-title">Bundles</div>

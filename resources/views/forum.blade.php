@@ -6,8 +6,20 @@
         <h1>Forum</h1>
         <hr>
         @if (Session::has('status'))
-            <div class="bg-success" style="padding: 20px">
+            <div class="bg-primary" style="padding: 20px">
                 {{ Session::get('status') }}
+            </div>
+            <hr>
+        @endif
+        @if (Session::has('deletionStatus'))
+            <div class="bg-danger" style="padding: 20px">
+                {{ Session::get('deletionStatus') }}
+            </div>
+            <hr>
+        @endif
+        @if (Session::has('updateStatus'))
+            <div class="bg-success" style="padding: 20px">
+                {{ Session::get('updateStatus') }}
             </div>
             <hr>
         @endif
@@ -44,8 +56,6 @@
                     <div class="col-md-12">{{ wordwrap($comment->comment, 50, "\n", true) }} </div>
                     <i>On: {{ $comment->date }} at: {{ $comment->time }}</i>
                     <br><br>
-                    {{--<a href="{{ url('/forum/' . $comment->id) }}"><button class="btn btn-success">Edit Post</button></a>
-                    <a href="{{ url('/forum/' . $comment->id) }}"><button class="btn btn-danger">Delete Post</button></a>--}}
                     @if($comment->id_user == Auth::user()->id || Auth::user()->user == 1)
                         <button type="button" data-toggle="modal" data-target="#deleteComment{{$modal}}" class="btn btn-danger">Delete Post</button>
                         <div class="modal fade" id="deleteComment{{$modal}}" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel">
@@ -84,7 +94,6 @@
                                             {{ Form::submit('Update', ['class' => 'btn btn-success']) }}
                                             {{ Form::close() }}
                                         </div>
-                                        {{--<button type="submit" form="form" class="btn btn-success">Edit</button>--}}
                                         <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                     </div>
                                 </div>

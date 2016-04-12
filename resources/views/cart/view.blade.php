@@ -10,6 +10,13 @@
 <div class="container" style="margin-top: 60px">
     <div class="row" >
         <div class="col-sm-12 col-md-10 col-md-offset-1">
+            @if (Session::has('additionStatus'))
+                <br>
+                <div class="bg-success" style="padding: 20px">
+                    {{ Session::get('additionStatus') }}
+                </div>
+                <hr>
+            @endif
             <table class="table table-hover panel-info">
                 <thead class="panel-heading">
                 <tr>
@@ -43,12 +50,23 @@
                             </a>
                         </td>
                     </tr>
-                    <?php array_push($url, $item->object_id);  ?>
+                    <?php
+                        array_push($url, $item->object_id);
+                        $modal = 0;
+                    ?>
                 @endforeach
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    @if ($total >= Auth::user()->coins )
+                        <td><h3  class="text-center" style="color: red">You don't have enough coins</h3></td>
+                        <td></td>
+                        <td>
+                            <a style="margin-top: 17px" class="btn btn-primary" href="{{ url('/buyCoins') }}">Buy Coins</a>
+                        </td>
+                    @else
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    @endif
                     <td><h3>Total</h3></td>
                     <td class="text-right"><h3><strong>{{$total}} coins</strong></h3></td>
                 </tr>
@@ -62,7 +80,55 @@
                     <td>
                     <td>
                         <?php $json = json_encode($url); ?>
-                        <a href="{{ url('/total/'. $total . '/items/' . $json) }}" class="btn btn-success">Buy with coins</a>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#buy{{$modal}}">Buy with coins</button>
+                            @if(Auth::user()->coins >= $total)
+                            <div class="modal fade" id="buy{{$modal}}" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="myModalLabel">Are you sure you want to buy Power-ups?</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            @foreach($items as $item)
+                                                <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="col-md-2"><img class="media-object thumbnail pull-left" src="{{$item->object->image}}" style="width: 60px"></div>
+                                                    <div class="col-md-6"><h4>{{ $item->object->name }}</h4></div>
+                                                    <div class="col-md-4"><h4>{{ $item->object->price }} coins</h4></div>
+                                                </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="pull-left">
+                                                <a href="{{ url('/total/'. $total . '/items/' . $json) }}" class="btn btn-success">Buy with coins</a>
+                                            </div>
+                                            <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @else
+                                <div class="modal fade" id="buy{{$modal}}" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title text-center" style="color: red" id="myModalLabel">You don't have enough coins</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                    <div class="text-center">
+                                                        <h4>Do you wish to buy more coins?</h4>
+                                                        <a class="btn btn-info" href="{{ url('/buyCoins') }}">Buy Coins</a>
+                                                    </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                            <?php $modal++ ?>
                     </td>
                 </tr>
                 </tbody>

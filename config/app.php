@@ -149,6 +149,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        /*Artdarek\Toastr\Providers\ToastrServiceProvider::class,*/
 
         /*
          * Application Service Providers...
@@ -206,6 +207,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        /*'Toastr'    => Artdarek\Toastr\Facades\Toastr::class,*/
     ],
 
 ];

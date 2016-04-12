@@ -10,6 +10,13 @@
 
     <div class="container" style="margin-top: 60px">
         <div class="col-md-12">
+            @if (Session::has('status'))
+                <br>
+                <div class="bg-success" style="padding: 20px">
+                    {{ Session::get('status') }}
+                </div>
+                <hr>
+            @endif
             <table class="table table-striped panel-info">
                 <thead  class="panel-heading">
                 <th class="panel-title">Objects</th>
@@ -28,6 +35,7 @@
                 @endif
                 </thead>
                 <tbody class="panel-body">
+                <?php $modal=0; ?>
                 @foreach ($objects as $object)
                     <tr>
                         <td><img src="{{ $object->image }}" class="media-object" style="max-width: 100px"></td>
@@ -46,23 +54,37 @@
                             </td>
                         @else
                             <td style="vertical-align: middle"td style="width: 220px">
-                                <a href="{{ url('/addProduct/' . $object->id) }}"><button class="btn btn-success">Add To Cart</button></a>
+                                {{--<a href="{{ url('/addProduct/' . $object->id) }}"><button class="btn btn-success">Add To Cart</button></a>--}}
+
+                                    <button type="button" data-toggle="modal" data-target="#confirmAdd{{$modal}}" class="btn btn-success">Add To Cart</button>
+                                    <div class="modal fade" id="confirmAdd{{$modal}}" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="myModalLabel">Do you wish to add the item to the cart?</h4>
+                                                </div>
+                                                <div class="modal-body col-md-12">
+                                                    <div class="col-md-4"><img src="{{ $object->image }}" class="media-object" style="max-width: 100px"></div>
+                                                    <div class="col-md-4"><h3>{{ $object->name }}</h3></div>
+                                                    <div class="col-md-4"><h3>{{ $object->price }} coins</h3></div>
+                                                    <hr>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <div class="pull-left">
+                                                        <a href="{{ url('/addProduct/' . $object->id) }}"><button class="btn btn-success">Add To Cart</button></a>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php $modal++ ?>
                                 <a href="{{ url('/buyCoins') }}"><button class="btn btn-info">Get Coins</button></a>
                             </td>
                         @endif
                     </tr>
                 @endforeach
                 </tbody>
-            {{--@if (Auth::user()->user == 1)
-                <tfoot>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><a href="{{ url('/newObject') }}"><button class="btn btn-success">Add Object</button></a></td>
-                </tfoot>
-            @endif--}}
             </table>
         </div>
     </div>

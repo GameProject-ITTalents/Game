@@ -181,10 +181,11 @@ class UserController extends Controller
                     'double_jump' => $double_jump,
                     'low_gravity' => $low_gravity
                 ]);
-            return redirect('/shop');
+            return redirect('/shop')->with('status', 'Power-ups purchased');
         }
         else {
-            return redirect('/buyCoins');
+            return redirect('/buyCoins')->with('status', 'You don\'t have enough coins');
+
         }
     }
     
