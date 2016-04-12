@@ -17,6 +17,8 @@ var PreloadState = (function() {
         this.load.tilemap('world_1', 'assets/tilemaps/world_1.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.image('tiles', 'assets/tilemaps/tile_sheet.png');
         this.load.spritesheet('tilesheet', 'assets/tilemaps/tile_sheet.png', 16, 16);
+        this.load.image('home', 'assets/images/home.png');
+        this.load.image('cart', 'assets/images/cart.png');
         this.load.audio('bump', 'assets/sounds/smb_bump.wav');
         this.load.audio('jump', 'assets/sounds/smb_jump-small.wav');
         this.load.audio('song', 'assets/sounds/smb_theme_song.mp3');
