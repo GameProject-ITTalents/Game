@@ -105,9 +105,9 @@
                         <li>
                             <a href="{{ url('/buyCoins') }}">View Coins Shop</a>
                         </li>
-                        {{--<li>
-                            <a href="#">Transactions</a>
-                        </li>--}}
+                        <li>
+                            <a href="{{ url('/admin/transactions') }}">View Transactions</a>
+                        </li>
                     </ul>
                 </li>
             </ul>

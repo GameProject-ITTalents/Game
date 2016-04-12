@@ -38,6 +38,7 @@ Route::post('/user/updatePassword','UserController@updatePassword');
 Route::post('/user/updateInfo','UserController@updateInfo');
 
 Route::get('admin/panel', 'AdminController@admin');
+Route::get('/admin/transactions', 'AdminController@transactions');
 
 Route::get('/viewAllUsers/{sortingMethod}', 'AdminController@viewAllUsers');
 Route::get('admin/addUser', 'AdminController@addUser');
@@ -64,8 +65,6 @@ Route::get('/removeItem/{productId}', 'CartController@removeItem');
 Route::get('/cart', 'CartController@showCart');
 
 Route::resource('total.items', 'UserController');
-
-/*Route::resource('products', 'ProductController');*/
 
 //FORUM
 Route::resource('/forum', 'PostsController');

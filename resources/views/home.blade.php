@@ -30,11 +30,11 @@
                             <a href="{{ url('/about') }}" class="btn btn-info btn-lg"><i class="fa fa-info fa-fw"></i> <span class="network-name">About</span></a>
                         </li>
                         <br>
-                        @if(Auth::user()->user == 1)
+                        {{--@if(Auth::user()->user == 1)
                         <li style="margin: 10px">
                             <a href="{{ url('/dev') }}" class="btn btn-info btn-lg"><i class="fa fa-cog fa-fw"></i> <span class="network-name">DEV</span></a>
                         </li>
-                        @endif
+                        @endif--}}
                     </ul>
                 </div>
             </div>

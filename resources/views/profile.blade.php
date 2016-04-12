@@ -45,7 +45,8 @@
                                 <button type="submit" form="form3" class="btn btn-success">Change Info</button>
                                 <br>
                             </form>
-                        @elseif ($user->social == 0 && Auth::user()->id == $user->id)
+                        @endif
+                        @if ($user->social == 0 && Auth::user()->id == $user->id)
                             <form class="panel" id="form2" method="post" action="{{url('user/updatePassword')}}">
                                 {{csrf_field()}}
                                 <label for="currentPassword">Old Password</label>

@@ -14,9 +14,7 @@
         <label for="">GitHub</label>
         <p>https://github.com/GameProject-ITTalents/Game.git</p>
         <hr>
-        <label for="">copyright</label>
-        <p>talents super mario game team</p>
-        <p>2016</p>
+        <p>	&copy; IT Talents 2016. All rights reserved</p>
     </div>
     </div>
 @endsection

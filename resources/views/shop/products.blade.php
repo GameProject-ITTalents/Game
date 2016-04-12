@@ -23,11 +23,11 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
-                @if (Auth::user()->user == 0)
+                {{--@if (Auth::user()->user == 0)
                     <th>Amount</th>
-                @else
+                @else--}}
                     <th></th>
-                @endif
+                {{--@endif--}}
                 @if (Auth::user()->user == 1)
                     <th>Modifications</th>
                     @else
@@ -42,11 +42,11 @@
                         <td style="vertical-align: middle"><h3>{{ $object->name }}</h3></td>
                         <td style="vertical-align: middle">{{ $object->description }}</td>
                         <td style="vertical-align: middle">{{ $object->price }}</td>
-                        @if (Auth::user()->user == 0)
+                        {{--@if (Auth::user()->user == 0)
                             <td style="vertical-align: middle"><input type="number" id="quantity" style="width: 40px" value="0"></td>
-                        @else
+                        @else--}}
                             <td></td>
-                        @endif
+                        {{--@endif--}}
                         @if (Auth::user()->user == 1)
                             <td style="vertical-align: middle"td style="width: 150px">
                                 <a href="{{ url('/editProduct/' . $object->id) }}"><button class="btn btn-primary">Edit Price</button></a>

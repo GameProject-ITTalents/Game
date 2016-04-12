@@ -65,10 +65,13 @@
                         </div>
                         <br>
                         <div class="col-md-9"><h4>Wallet : </h4></div>
+                        @if(Auth::user()->id == $user->id)
                         <div class="col-md-3" style="color: #31AFD4">
                             <h3  style="margin: 0">{{ $user->coins }}</h3>
                         </div>
+                        @endif
                     </div>
+                    @if(Auth::user()->id == $user->id)
                     <div class="col-md-4">
                         <br><br>
                         <div class="col-md-8"><h4>Mario : </h4></div>
@@ -86,6 +89,7 @@
                         <div class="col-md-8"><h4>Low Gravity : </h4></div>
                         <div class="col-md-4" style="color: #31AFD4"><h3  style="margin: 0">{{$user->low_gravity}}</h3></div>
                     </div>
+                    @endif
                 </div>
             </div>
 

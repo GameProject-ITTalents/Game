@@ -115,5 +115,10 @@ class AdminController extends Controller
             return redirect()->back();
         }
     }
+
+    public function transactions()
+    {
+        return view('admin.transactions');
+    }
 }
 
