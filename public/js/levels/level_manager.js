@@ -12,25 +12,25 @@ var LevelManager = (function() {
         this.game = level.game;
         this.physics = level.physics;
         this.inputHandler = level.inputHandler;
-        this.timer = level.timer;
+        
         this.coins = this.game.coins;
-        this.coinsImage = this.game.add.sprite(10, 10, 'tilesheet', 57);
+        this.coinsImage = this.game.add.sprite(70, 10, 'tilesheet', 57);
         this.coinsImage.fixedToCamera = true;
-        this.coinsText = this.game.add.text(30, 14, "x " + this.coins, {
+        this.coinsText = this.game.add.text(90, 14, "x " + this.coins, {
             font: "12px Arial", 
             fill: "#fff"
         });
         this.coinsText.fixedToCamera = true;
         this.marios = this.game.marios;
-        this.lifesImage = this.game.add.sprite(60, 10, 'playersheetSmall', 0);
+        this.lifesImage = this.game.add.sprite(120, 10, 'playersheetSmall', 0);
         this.lifesImage.fixedToCamera = true;
-        this.lifesText = this.game.add.text(80, 14, "x " + this.marios, {
+        this.lifesText = this.game.add.text(140, 14, "x " + this.marios, {
             font: "12px Arial", 
             fill: "#fff"
         });
         this.lifesText.fixedToCamera = true;
         this.score = this.game.score;
-        this.scoreText = this.game.add.text(110, 14, "score: " + this.score, {
+        this.scoreText = this.game.add.text(170, 14, "score: " + this.score, {
             font: "12px Arial", 
             fill: "#fff"
         });
@@ -103,6 +103,17 @@ var LevelManager = (function() {
 
         this.level.camera.follow(this.player, Phaser.FOLLOW_PLATFORMER);
         this.physics.arcade.gravity.y = this.level.gravity;
+
+        this.game.add.button(10, 10, 'home', goToHome, this, 2, 1, 0);
+        this.game.add.button(30, 10, 'cart', goToShop, this, 2, 1, 0);
+
+        function goToHome() {
+            window.location = '/home';
+        }
+
+        function goToShop() {
+            window.location = '/shop';
+        }
     };
 
     LevelManager.prototype.update = function() {
