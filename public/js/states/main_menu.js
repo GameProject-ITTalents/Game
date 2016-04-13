@@ -1,6 +1,6 @@
 var MainMenuState = (function() {
 	function MainMenuState(game) {
-		MenuState.call(this, game);
+		MenuState.call(this, game, 'mainmenu');
 	}
 
 	MainMenuState.prototype = Object.create(MenuState.prototype);
@@ -11,19 +11,16 @@ var MainMenuState = (function() {
 
 		MenuState.prototype.create.call(that);
 
-		that.background = that.game.add.sprite(0, 0, 'mainmenu');
-	    that.background.height = that.game.height;
-	    that.background.width = that.game.width;
+		that.inputHandler.setInputMap({
+			start: Phaser.Keyboard.SPACEBAR
+		});
 
-	    that.inputHandler.setInputMap({
-            start: Phaser.Keyboard.ENTER
-        });
+		that.inputHandler.addListener('start', that, null, start);
+		this.game.add.button(this.game.width / 2 - 30, 150, 'start', start, this, 2, 1, 0).fixedToCamera = true;
 
-        that.inputHandler.addListener('start', that, start);
-
-        function start(keycode) {
-            that.state.start('play');
-        }
+		function start(keycode) {
+			that.state.start('levelup');
+		}
 	};
 
 	return MainMenuState;
