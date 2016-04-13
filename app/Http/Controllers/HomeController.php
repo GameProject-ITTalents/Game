@@ -37,9 +37,9 @@ class HomeController extends Controller
 
     public function startGame()
     {
-        //return json_encode(Auth::user());
-        
-        //redirect('/game');
+        if(Auth::user()->mario < 1) {
+            return redirect('/shop')->with('gameStatus', 'You don\'t have enough life. Buy Mario to play');
+        }
         return view('startGame');
     }
 

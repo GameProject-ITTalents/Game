@@ -17,6 +17,13 @@
                 </div>
                 <hr>
             @endif
+                @if (Session::has('gameStatus'))
+                    <br>
+                    <div class="bg-danger" style="padding: 20px">
+                        {{ Session::get('gameStatus') }}
+                    </div>
+                    <hr>
+                @endif
             <table class="table table-striped panel-info">
                 <thead  class="panel-heading">
                 <th class="panel-title">Objects</th>
