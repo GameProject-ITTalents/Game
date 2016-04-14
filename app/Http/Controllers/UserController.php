@@ -36,10 +36,11 @@ class UserController extends Controller
 
     public function updateProfile(Request $request)
     {
-        $rules = ['image' => 'image|required'];
+        $rules = ['image' => 'image|required|size:5'];
         $messages = [
             'image.image' => 'Non supported format',
-            'image.required' => 'No file selected'
+            'image.required' => 'No file selected',
+            'image.size' => 'The image is too big'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);

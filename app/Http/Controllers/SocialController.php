@@ -52,8 +52,6 @@ class SocialController extends Controller
                 $social->save();
             }
             return redirect('home');
-        } else {
-            return 'XXXXXX';
         }
 
         return Socialite::driver($provider)->redirect();

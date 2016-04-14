@@ -89,13 +89,13 @@ class AdminController extends Controller
     {
         switch ($sortingMethod) {
             case 1:
-                $users = DB::table('users')->select()->orderBy('created_at', 'asc')->paginate(5);
+                $users = DB::table('users')->select()->orderBy('created_at', 'asc')->get();
                 break;
             case 2:
-                $users = DB::table('users')->select()->orderBy('created_at', 'desc')->paginate(5);
+                $users = DB::table('users')->select()->orderBy('created_at', 'desc')->get();
                 break;
             case 0:
-                $users = DB::table('users')->select()->orderBy('name', 'asc')->paginate(5);
+                $users = DB::table('users')->select()->orderBy('name', 'asc')->get();
                 break;
         }
 

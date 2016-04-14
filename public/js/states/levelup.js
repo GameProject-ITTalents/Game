@@ -1,6 +1,8 @@
 var LevelupState = (function() {
 	function LevelupState(game) {
 		MenuState.call(this, game, 'levelup');
+
+		this.game = game;
 	}
 
 	LevelupState.prototype = Object.create(MenuState.prototype);
@@ -49,7 +51,7 @@ var LevelupState = (function() {
 		this.game.add.button(60, 80, 'start', start, this, 2, 1, 0).fixedToCamera = true;
 
 		function start(keycode) {
-			that.state.start('play');
+			that.game.state.start('play');
 		}
 	};
 

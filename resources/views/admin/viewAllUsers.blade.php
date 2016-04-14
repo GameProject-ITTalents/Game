@@ -65,7 +65,7 @@
 
         <hr>
 
-            <!-- Pagination -->
+            {{--<!-- Pagination -->
             <div class="row text-center">
                 <div class="col-lg-12">
                     <ul class="pagination">
@@ -77,14 +77,14 @@
                                 <a href="#">{{ $i }}</a>
                             </li>
                         @endfor
-                        {{--class="active"--}}
+                        --}}{{--class="active"--}}{{--
                         <li>
                             <a href="#">&raquo;</a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <!-- /.row -->
+            <!-- /.row -->--}}
         </div>
         <!-- /.container -->
 

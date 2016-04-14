@@ -79,7 +79,10 @@
                         </a>
                     <td>
                     <td>
-                        <?php $json = json_encode($url); ?>
+                        <?php
+                        $json = json_encode($url);
+                        $modal = 0;
+                        ?>
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#buy{{$modal}}">Buy with coins</button>
                             @if(Auth::user()->coins >= $total)
                             <div class="modal fade" id="buy{{$modal}}" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel">

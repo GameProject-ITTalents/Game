@@ -30,11 +30,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
-                {{--@if (Auth::user()->user == 0)
-                    <th>Amount</th>
-                @else--}}
                     <th></th>
-                {{--@endif--}}
                 @if (Auth::user()->user == 1)
                     <th>Modifications</th>
                     @else
@@ -49,20 +45,13 @@
                         <td style="vertical-align: middle"><h3>{{ $object->name }}</h3></td>
                         <td style="vertical-align: middle">{{ $object->description }}</td>
                         <td style="vertical-align: middle">{{ $object->price }}</td>
-                        {{--@if (Auth::user()->user == 0)
-                            <td style="vertical-align: middle"><input type="number" id="quantity" style="width: 40px" value="0"></td>
-                        @else--}}
-                            <td></td>
-                        {{--@endif--}}
+                        <td></td>
                         @if (Auth::user()->user == 1)
                             <td style="vertical-align: middle"td style="width: 150px">
                                 <a href="{{ url('/editProduct/' . $object->id) }}"><button class="btn btn-primary">Edit Price</button></a>
-                                {{--<a href="{{ url('/deleteProduct/' . $object->id) }}"><button class="btn btn-danger">Delete</button></a>--}}
                             </td>
                         @else
                             <td style="vertical-align: middle"td style="width: 220px">
-                                {{--<a href="{{ url('/addProduct/' . $object->id) }}"><button class="btn btn-success">Add To Cart</button></a>--}}
-
                                     <button type="button" data-toggle="modal" data-target="#confirmAdd{{$modal}}" class="btn btn-success">Add To Cart</button>
                                     <div class="modal fade" id="confirmAdd{{$modal}}" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel">
                                         <div class="modal-dialog">

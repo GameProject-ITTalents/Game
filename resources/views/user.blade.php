@@ -64,13 +64,13 @@
                             <h3  style="margin: 0">{{$user->highest_score}}</h3>
                         </div>
                         <br>
-                        <div class="col-md-9"><h4>Wallet : </h4></div>
                         @if(Auth::user()->id == $user->id)
+                        <div class="col-md-9"><h4>Wallet : </h4></div>
                         <div class="col-md-3" style="color: #31AFD4">
                             <h3  style="margin: 0">{{ $user->coins }}</h3>
                         </div>
                         @endif
-                    </div>
+                        </div>
                     @if(Auth::user()->id == $user->id)
                     <div class="col-md-4">
                         <br><br>
