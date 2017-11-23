@@ -4,7 +4,7 @@ var KeyboardHandler = (function() {
 	}
 
 	KeyboardHandler.prototype = Object.create(InputHandler.prototype);
-	KeyboardHandler.prototype.constructor = KeyboardHandler();
+	KeyboardHandler.prototype.constructor = KeyboardHandler;
 
 	KeyboardHandler.prototype.create = function(input) {
 		input.keyboard.addCallbacks(this, onKeyDown, onKeyUp);

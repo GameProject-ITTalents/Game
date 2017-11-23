@@ -4,7 +4,7 @@ var MainMenuState = (function() {
 	}
 
 	MainMenuState.prototype = Object.create(MenuState.prototype);
-	MainMenuState.prototype.constructor = MainMenuState();
+	MainMenuState.prototype.constructor = MainMenuState;
 
 	MainMenuState.prototype.create = function() {
 		var that = this;

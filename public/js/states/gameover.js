@@ -4,7 +4,7 @@ var GameOverState = (function() {
 	}
 
 	GameOverState.prototype = Object.create(MenuState.prototype);
-	GameOverState.prototype.constructor = GameOverState();
+	GameOverState.prototype.constructor = GameOverState;
 
 	GameOverState.prototype.create = function() {
 		var that = this;

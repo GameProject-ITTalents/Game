@@ -6,7 +6,7 @@ var LevelupState = (function() {
 	}
 
 	LevelupState.prototype = Object.create(MenuState.prototype);
-	LevelupState.prototype.constructor = LevelupState();
+	LevelupState.prototype.constructor = LevelupState;
 
 	LevelupState.prototype.create = function() {
 		var that = this;
